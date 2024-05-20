@@ -10,6 +10,12 @@ Pour faire usage de ce package il faut avoir les éléments suivants
 5. sqlalchemy
 6. sqlalchemy-trino
 
+## Installation
+
+```shell
+pip install git+https://github.com/Donutson/starburst_api_python.git
+```
+
 ## Présentation du package
 
 ### classes/class_starburst_connection_info.py
