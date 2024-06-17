@@ -34,6 +34,6 @@ class RelevantLink:
         self.label = label
         self.url = url
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {"label": self.label, "url": self.url}

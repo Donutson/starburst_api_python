@@ -1,9 +1,8 @@
 """
 DatasetView class
 """
-
-from classes.class_dataset_view import DatasetView
-from classes.class_definition_properties import DefinitionProperties
+from starburst_api.classes.class_dataset_view import DatasetView
+from starburst_api.classes.class_definition_properties import DefinitionProperties
 
 
 class DatasetMaterializedView(DatasetView):
@@ -46,7 +45,7 @@ class DatasetMaterializedView(DatasetView):
 
         self.definition_properties = definition_properties
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {
             "name": self.name,

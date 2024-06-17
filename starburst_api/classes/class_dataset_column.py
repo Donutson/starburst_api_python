@@ -44,7 +44,10 @@ class DatasetColumn:
         self.type = type
         self.description = description
 
-    def to_dict(self):
+    def __str__(self) -> str:
+        return f"({self.name}; {self.type}; {self.description})"
+
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {
             "name": self.name,

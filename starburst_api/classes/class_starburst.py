@@ -15,6 +15,8 @@ from starburst_api.classes.class_starburst_connection_info import (
 )
 from starburst_api.classes.class_starburst_domain_info import StarburstDomainInfo
 from starburst_api.classes.class_data_product import DataProduct
+from starburst_api.classes.class_tag import Tag
+from starburst_api.helpers.utils import data_product_json_to_class
 
 
 requests.packages.urllib3.disable_warnings()
@@ -164,7 +166,65 @@ class Starburst:
             print(f"Failed to update data product. Status code: {response.status_code}")
         print(response.text)
 
-    def get_domain_by_name(self, domain_name):
+    def get_domain_by_id(self, domain_id: str, as_class: bool = False):
+        """
+        Retrieve information about a domain by its ID.
+
+        Args:
+            domain_id (str): The ID of the domain to retrieve.
+            as_class (bool, optional): If True, return the domain information as a
+                                    StarburstDomainInfo object. If False, return
+                                    the domain information as a dictionary.
+                                    Default is False.
+
+        Returns:
+            StarburstDomainInfo or dict: The domain information. The format depends on
+                                        the value of `as_class`:
+                                        - If `as_class` is True: Returns a StarburstDomainInfo object.
+                                        - If `as_class` is False: Returns a dictionary.
+
+        Raises:
+            requests.exceptions.RequestException: If an error occurs during the HTTP request.
+
+        Prints:
+            str: Error messages if the operation is forbidden or not found.
+
+        Examples:
+            >>> get_domain_by_id("12345")
+            {'name': 'Sales', 'description': 'Sales data domain', 'schemaLocation': 's3://sales-data'}
+
+            >>> get_domain_by_id("12345", as_class=True)
+            StarburstDomainInfo(name='Sales', description='Sales data domain', schema_location='s3://sales-data')
+        """
+        url = (
+            f"https://{self.connection_info.host}:{self.connection_info.port}"
+            + f"/api/v1/dataProduct/domains/{domain_id}"
+        )
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
+        auth = (self.connection_info.user, self.connection_info.password)
+
+        response = requests.get(url, headers=headers, auth=auth, verify=False)
+
+        if response.status_code == 200:
+            domain_tag = response.json()
+            if as_class:
+                return StarburstDomainInfo(
+                    name=domain_tag.get("name"),
+                    description=domain_tag.get("description"),
+                    schema_location=domain_tag.get("schemaLocation"),
+                )
+            return domain_tag
+        if response.status_code == 403:
+            print(f"Operation forbidden: {response}")
+        if response.status_code == 404:
+            print(f"Operation not found: {response}")
+
+        return None
+
+    def get_domain_by_name(self, domain_name: str, as_class: bool=False):
         """
         Retrieves a domain by its name from the list of domains.
 
@@ -175,22 +235,96 @@ class Starburst:
 
         Args:
             domain_name (str): The name of the domain to search for.
+            as_class (bool, optional): If True, return the domain information as a
+                                    StarburstDomainInfo object. If False, return
+                                    the domain information as a dictionary.
+                                    Default is False.
 
         Returns:
-            dict or None: The domain dictionary if found, otherwise None.
+            StarburstDomainInfo or dict: The domain information. The format depends on
+                                        the value of `as_class`:
+                                        - If `as_class` is True: Returns a StarburstDomainInfo object.
+                                        - If `as_class` is False: Returns a dictionary.
         """
         domains_list = self.list_domains()
 
         for domain in domains_list:
             if domain["name"] == domain_name:
+                if as_class:
+                    return StarburstDomainInfo(
+                        name=domain["name"],
+                        description=domain["description"],
+                        schema_location=domain["schemaLocation"],
+                    )
                 return domain
 
         print(f"Domain {domain_name} not found")
         return None
 
-    def get_data_product(self, domain_name, data_product_name):
+    def get_data_product(
+        self, domain_name: str, data_product_name: str, as_class: bool = False
+    ):
         """
-        Retrieves a specific data product by name from a specified domain.
+    Retrieve a specific data product by name from a specified domain.
+
+    This method constructs an API URL and sends a GET request to retrieve the data product
+    identified by `data_product_name` within the domain specified by `domain_name`.
+    The method handles the response by either returning the JSON data of the product or
+    converting it to a DataProduct object if specified.
+
+    Args:
+        domain_name (str): The name of the domain where the data product is located.
+        data_product_name (str): The name of the data product to retrieve.
+        as_class (bool, optional): If True, return the data product information as a
+                                   DataProduct object. If False, return the data product
+                                   information as a dictionary. Default is False.
+
+    Returns:
+        dict or DataProduct or None: If successful, returns the data product details as a 
+                                     dictionary or a DataProduct object, depending on the value 
+                                     of `as_class`. If the product is not found or another error 
+                                     occurs, prints an error message and returns None.
+
+    Raises:
+        KeyError: If the domain is not found, which could interrupt the retrieval of the domain ID.
+    """
+        domain = self.get_domain_by_name(domain_name)
+
+        if domain:
+            for data_product in domain["assignedDataProducts"]:
+                if data_product["name"] == data_product_name:
+                    url = (
+                        f"https://{self.connection_info.host}:{self.connection_info.port}"
+                        + f"/api/v1/dataProduct/products/{data_product['id']}"
+                    )
+                    headers = {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                    }
+                    auth = (self.connection_info.user, self.connection_info.password)
+
+                    response = requests.get(
+                        url, headers=headers, auth=auth, verify=False
+                    )
+
+                    if response.status_code == 200:
+                        if as_class:
+                            return data_product_json_to_class(response.json())
+                        return response.json()
+                    if response.status_code == 403:
+                        print(f"Operation forbidden: {response}")
+                    if response.status_code == 404:
+                        print(f"Operation not found: {response}")
+
+            print(
+                f"Data product {data_product_name} not found on domain {domain_name}."
+            )
+
+        return None
+
+    def get_data_product_details(self, domain_name: str, data_product_name: str):
+        """
+        Retrieves a specific data product details by name from a specified domain.
 
         This method constructs an API URL and sends a GET request to retrieve the data product
         identified by `data_product_name` within the domain specified by `domain_name`.
@@ -238,6 +372,77 @@ class Starburst:
 
         return None
 
+    def get_data_product_tags(
+        self, domain_name: str, data_product_name: str, as_class: bool = False
+    ):
+        """
+        Retrieve tags for a specific data product within a domain.
+
+        Args:
+            domain_name (str): The name of the domain containing the data product.
+            data_product_name (str): The name of the data product whose tags are to be retrieved.
+            as_class (bool, optional): If True, return tags as a list of Tag objects.
+                                    If False, return tags as a list of dictionaries.
+                                    Default is False.
+
+        Returns:
+            list: A list of tags for the specified data product. The format of the tags
+                depends on the value of `as_class`:
+                - If `as_class` is True: Returns a list of Tag objects.
+                - If `as_class` is False: Returns a list of dictionaries.
+
+        Raises:
+            ValueError: If the domain or data product is not found.
+            requests.exceptions.RequestException: If an error occurs during the HTTP request.
+
+        Prints:
+            str: Error messages if the operation is forbidden or not found.
+
+        Examples:
+            >>> get_data_product_tags("Sales", "ProductA")
+            [{'id': 1, 'value': 'important'}, {'id': 2, 'value': 'sensitive'}]
+
+            >>> get_data_product_tags("Sales", "ProductA", as_class=True)
+            [Tag(id=1, value='important'), Tag(id=2, value='sensitive')]
+        """
+        domain = self.get_domain_by_name(domain_name)
+
+        if domain:
+            for data_product in domain["assignedDataProducts"]:
+                if data_product["name"] == data_product_name:
+                    url = (
+                        f"https://{self.connection_info.host}:{self.connection_info.port}"
+                        + f"/api/v1/dataProduct/tags/products/{data_product['id']}"
+                    )
+                    headers = {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                    }
+                    auth = (self.connection_info.user, self.connection_info.password)
+
+                    response = requests.get(
+                        url, headers=headers, auth=auth, verify=False
+                    )
+
+                    if response.status_code == 200:
+                        json_tag = response.json()
+                        if as_class:
+                            return [
+                                Tag(id=tag.get("id"), value=tag.get("value"))
+                                for tag in json_tag
+                            ]
+                        return json_tag
+                    if response.status_code == 403:
+                        print(f"Operation forbidden: {response}")
+                    if response.status_code == 404:
+                        print(f"Operation not found: {response}")
+
+            print(
+                f"Data product {data_product_name} not found on domain {domain_name}."
+            )
+
+        return None
+
     def list_domains(self):
         """
         Retrieve a list of domains from the server.
@@ -275,7 +480,7 @@ class Starburst:
         print(response.text)
         return response.status_code
 
-    def delete_domain_by_name(self, domain_name):
+    def delete_domain_by_name(self, domain_name: str):
         """
         Delete a domain by its name.
 
@@ -328,7 +533,7 @@ class Starburst:
                 print(response.text)
 
     def delete_data_product(
-        self, domain_name, data_product_name, delete_product_ressources="false"
+        self, domain_name: str, data_product_name: str, delete_product_ressources: str="false"
     ):
         """
         Deletes a specified data product within a given domain.
@@ -395,7 +600,7 @@ class Starburst:
                 )
             print(response.text)
 
-    def publish_data_product(self, domain_name, data_product_name, force="false"):
+    def publish_data_product(self, domain_name: str, data_product_name: str, force: str="false"):
         """
         Publishes a specified data product within a given domain.
 
@@ -458,7 +663,7 @@ class Starburst:
                 )
             print(response.text)
 
-    def execute_query(self, query, to_pandas=True, verify_ssl=False):
+    def execute_query(self, query: str, to_pandas: bool=True, verify_ssl: bool=False):
         """
         Executes an SQL query on the Starburst (Trino) database and returns the results.
 
@@ -501,7 +706,7 @@ class Starburst:
             print(f"SQLAlchemy error occurred: {error_msg}")
             return -2
 
-    def create_mv_view(self, query, view_name, cron, **options):
+    def create_mv_view(self, query: str, view_name: str, cron: str, **options):
         """
         Creates a materialized view in the database with specified properties and scheduling.
 
@@ -560,7 +765,7 @@ class Starburst:
 
         return res
 
-    def create_view(self, query, view_name, **options):
+    def create_view(self, query: str, view_name: str, **options):
         """
         Creates a SQL view with a specified name and query, including optional custom settings.
 

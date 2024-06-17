@@ -1,7 +1,6 @@
 """
 DataProduct class
 """
-import re
 
 
 class DataProduct:
@@ -37,7 +36,7 @@ class DataProduct:
             ValueError: If any of the attributes violate the specified constraints.
         """
         # Check required attributes
-        self._validate_name(name)
+        self._validate_string(name, "name", min_length=1, max_length=40)
         self._validate_string(
             catalog_name, "catalog_name", min_length=1, max_length=255
         )
@@ -58,12 +57,7 @@ class DataProduct:
         self.owners = options.get("owners", [])
         self.relevant_links = options.get("relevant_links", [])
 
-    def _validate_name(self, name: str):
-        """Validate the name attribute."""
-        if not re.match(r"^[a-z]+(?:_[a-z0-9]+)*$", name):
-            raise ValueError("Name must be in lower_underscore_camel_case format.")
-
-    def _validate_string(self, value, attribute_name, min_length=None, max_length=None):
+    def _validate_string(self, value: str, attribute_name: str, min_length: int=None, max_length: int=None):
         """Validate string attributes."""
         if value is not None:
             if not isinstance(value, str):
@@ -77,14 +71,14 @@ class DataProduct:
                     f"{attribute_name} must be at most {max_length} characters long."
                 )
 
-    def _validate_uuid(self, value, attribute_name):
+    def _validate_uuid(self, value: str, attribute_name: str):
         """Validate UUID attributes."""
         if value is not None:
             if not isinstance(value, str):
                 raise ValueError(f"{attribute_name} must be a string (UUID).")
             # Add additional UUID validation logic if needed
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {
             "name": self.name,

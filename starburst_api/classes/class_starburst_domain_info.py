@@ -9,7 +9,7 @@ class StarburstDomainInfo:
     MAX_NAME_LENGTH = 255
     MAX_SCHEMA_LOCATION_LENGTH = 255
 
-    def __init__(self, name, description, schema_location, **options):
+    def __init__(self, name: str, description: str, schema_location: str, **options):
         """
         Initialize the StarburstDomain object.
 
@@ -54,7 +54,7 @@ class StarburstDomainInfo:
             f"schema_location={self.schema_location})"
         )
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {
             "name": self.name,

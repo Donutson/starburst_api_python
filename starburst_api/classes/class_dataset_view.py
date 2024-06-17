@@ -44,7 +44,7 @@ class DatasetView:
             raise ValueError("Columns must be a list of DatasetColumn objects.")
         self.columns = columns
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {
             "name": self.name,

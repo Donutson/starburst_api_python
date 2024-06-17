@@ -28,7 +28,10 @@ class Owner:
         self.name = name
         self.email = email
 
-    def _validate_string(self, value, attribute_name, min_length=None, max_length=None):
+    def __str__(self) -> str:
+        return f"({self.name}: {self.email})"
+
+    def _validate_string(self, value: str, attribute_name: str, min_length=None, max_length=None):
         """Validate string attributes."""
         if not isinstance(value, str):
             raise ValueError(f"{attribute_name} must be a string.")
@@ -41,6 +44,6 @@ class Owner:
                 f"{attribute_name} must be at most {max_length} characters long."
             )
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {"name": self.name, "email": self.email}

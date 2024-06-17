@@ -15,7 +15,7 @@ class DefinitionProperties:
 
     VALID_INTERVAL_FORMAT = re.compile(r"^[1-9]\d*[mhdw]$")
 
-    def __init__(self, refresh_interval: str = None, incremental_column: str = None):
+    def __init__(self, refresh_interval: str, incremental_column: str = None):
         """
         Initialize a DefinitionProperties object.
 
@@ -27,23 +27,17 @@ class DefinitionProperties:
                         or if refresh_interval is not in the specified format
                         or if refresh_interval is less than "60m".
         """
-        if refresh_interval is None and incremental_column is None:
+        if not self.VALID_INTERVAL_FORMAT.match(refresh_interval):
             raise ValueError(
-                "At least one of refresh_interval or incremental_column must be provided."
+                "Invalid format for refresh_interval. Valid formats: '60m', '4h', '2d', '1w'"
             )
-
-        if refresh_interval:
-            if not self.VALID_INTERVAL_FORMAT.match(refresh_interval):
-                raise ValueError(
-                    "Invalid format for refresh_interval. Valid formats: '60m', '4h', '2d', '1w'"
-                )
-            if (refresh_interval[-1] == "m") and (int(refresh_interval[:-1]) < 60):
-                raise ValueError("refresh_interval must be at least '60m'")
+        if (refresh_interval[-1] == "m") and (int(refresh_interval[:-1]) < 60):
+            raise ValueError("refresh_interval must be at least '60m'")
 
         self.refresh_interval = refresh_interval
         self.incremental_column = incremental_column
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         "Convert the instance to a dictionnary"
         return {
             "refresh_interval": self.refresh_interval,
