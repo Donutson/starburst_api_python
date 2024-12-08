@@ -1,7 +1,6 @@
 """
 Class to interact with a starburst instance
 """
-import os
 import json
 import pandas as pd
 import requests
@@ -15,7 +14,6 @@ from starburst_api.classes.class_starburst_connection_info import (
 )
 from starburst_api.classes.class_starburst_domain_info import StarburstDomainInfo
 from starburst_api.classes.class_data_product import DataProduct
-from starburst_api.classes.class_tag import Tag
 from starburst_api.helpers.utils import (
     read_starburst_view_files,
     validate_query_path,
