@@ -6,7 +6,7 @@ StarburstConnectionInfo
 class StarburstConnectionInfo:
     """Contains information required to establish a connection with Starburst."""
 
-    def __init__(self, host: str, user: str, password:str, **options):
+    def __init__(self, host: str, user: str, password: str, **options):
         """
         Initialize the StarburstConnectionInfo object.
 

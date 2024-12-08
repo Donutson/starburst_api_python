@@ -1,7 +1,7 @@
 """
 Class to interact with a starburst instance
 """
-
+import os
 import json
 import pandas as pd
 import requests
@@ -16,7 +16,21 @@ from starburst_api.classes.class_starburst_connection_info import (
 from starburst_api.classes.class_starburst_domain_info import StarburstDomainInfo
 from starburst_api.classes.class_data_product import DataProduct
 from starburst_api.classes.class_tag import Tag
-from starburst_api.helpers.utils import data_product_json_to_class
+from starburst_api.helpers.utils import (
+    read_starburst_view_files,
+    validate_query_path,
+    map_view_config_fields,
+    read_query_file,
+    find_data_product,
+    fetch_data_product,
+    handle_fetch_data_product_response,
+    fetch_data_product_tags,
+    process_fetch_data_product_tags_response,
+)
+from starburst_api.helpers.variables import (
+    APPLICATION_JSON_TEXT,
+    STARBURST_SSL_VERIFICATION,
+)
 
 
 requests.packages.urllib3.disable_warnings()
@@ -52,11 +66,18 @@ class Starburst:
             f"https://{self.connection_info.host}:{self.connection_info.port}/"
             + "api/v1/dataProduct/domains"
         )
-        headers = {"Accept": "application/json", "Content-Type": "application/json"}
+        headers = {
+            "Accept": APPLICATION_JSON_TEXT,
+            "Content-Type": APPLICATION_JSON_TEXT,
+        }
         auth = (self.connection_info.user, self.connection_info.password)
 
         response = requests.post(
-            url, headers=headers, auth=auth, json=domain.to_dict(), verify=False
+            url,
+            headers=headers,
+            auth=auth,
+            json=domain.to_dict(),
+            verify=STARBURST_SSL_VERIFICATION,
         )
 
         if response.status_code == 200:
@@ -88,11 +109,18 @@ class Starburst:
             f"https://{self.connection_info.host}:{self.connection_info.port}"
             + "/api/v1/dataProduct/products"
         )
-        headers = {"Accept": "application/json", "Content-Type": "application/json"}
+        headers = {
+            "Accept": APPLICATION_JSON_TEXT,
+            "Content-Type": APPLICATION_JSON_TEXT,
+        }
         auth = (self.connection_info.user, self.connection_info.password)
 
         response = requests.post(
-            url, headers=headers, auth=auth, json=data_product.to_dict(), verify=False
+            url,
+            headers=headers,
+            auth=auth,
+            json=data_product.to_dict(),
+            verify=STARBURST_SSL_VERIFICATION,
         )
 
         if response.status_code == 200:
@@ -103,6 +131,118 @@ class Starburst:
                 + "Status code: {response.status_code}"
             )
             print(response.text)
+
+    def create_view_from_config(
+        self, config: list = None, views_dir: str = None, strict: bool = False
+    ):
+        """
+        Creates views from the provided configuration using a Starburst connection.
+
+        Args:
+            config (list): List of view configuration dictionaries.
+            views_dir (str): Directory containing view configuration files.
+            strict (bool, optional): If True, stops execution on the first error. Defaults to False.
+        """
+
+        def create_view_result_handler(res, view_name, view_type, strict):
+            """
+            Handle the result of the view creation.
+
+            Args:
+                res (int or other): Result of the view creation.
+                view_name (str): Name of the view.
+                view_type (str): Type of the view ("view" or "materialized_view").
+                strict (bool): If True, stops execution on the first error.
+            """
+            if isinstance(res, int):
+                print(f"Failed to create {view_type} {view_name}")
+                if strict:
+                    return
+            else:
+                print(f"{view_type.capitalize()} {view_name} was successfully created")
+
+        if not config and not views_dir:
+            print(
+                "Please specify one of the following arguments 'config' or 'views_dir'"
+            )
+            return
+
+        if views_dir:
+            config = read_starburst_view_files(views_dir)
+
+        mapped_fields = {
+            "name": "view_name",
+            "cron": "cron",
+            "comment": "comment",
+            "gracePeriod": "grace_period",
+            "maxImportDuration": "max_import_duration",
+            "incrementalColumn": "incremental_column",
+            "partitionedBy": "partitioned_by",
+        }
+
+        for view_conf in config:
+            if not validate_query_path(view_conf, strict):
+                continue
+
+            args = map_view_config_fields(view_conf, mapped_fields)
+            query = read_query_file(view_conf["queryPath"])
+
+            if view_conf.get("type") == "materialized_view":
+                res = self.create_mv_view(query=query, **args)
+                create_view_result_handler(
+                    res, args.get("view_name"), "materialized view", strict
+                )
+            else:
+                res = self.create_view(query=query, **args)
+                create_view_result_handler(res, args.get("view_name"), "view", strict)
+
+    def update_domain(self, domain: StarburstDomainInfo):
+        """
+        Update a domain's configuration in the Starburst Data Product system.
+
+        This function sends a PUT request to the Starburst API to update the domain specified by `domain.id`.
+        It handles different HTTP response status codes to provide appropriate feedback.
+
+        Args:
+            domain (StarburstDomainInfo): The domain information to update.
+
+        Returns:
+            int: The HTTP status code of the response.
+        """
+        url = (
+            f"https://{self.connection_info.host}:{self.connection_info.port}/"
+            + f"api/v1/dataProduct/domains/{domain.id}"
+        )
+        headers = {
+            "Accept": APPLICATION_JSON_TEXT,
+            "Content-Type": APPLICATION_JSON_TEXT,
+        }
+        auth = (self.connection_info.user, self.connection_info.password)
+
+        response = requests.put(
+            url,
+            headers=headers,
+            auth=auth,
+            json=domain.to_dict(),
+            verify=STARBURST_SSL_VERIFICATION,
+        )
+
+        if response.status_code == 200:
+            print(f"Domain {domain.name} had been updated successfully")
+        elif response.status_code == 400:
+            print(f"Bad request when attempting to update domain {domain.name}")
+        elif response.status_code == 403:
+            print(f"Operation forbidden when attempting to update domain {domain.name}")
+        elif response.status_code == 404:
+            print(
+                f"Operation not found  when attempting to update domain {domain.name}"
+            )
+        else:
+            print(
+                f"Failed to update domain {domain.name}. Status code: {response.status_code}"
+            )
+        print(response.text)
+        return response.status_code
 
     def update_data_product(self, data_product: DataProduct):
         """
@@ -118,8 +258,7 @@ class Starburst:
                                         that serializes its properties to a dictionary format.
 
         Returns:
-            None: Outputs the outcome of the update operation to the console. Does not
-                return any value.
+            None: Int: Status code of the operation
 
         Side Effects:
             Prints messages to the console based on the HTTP status code returned by the
@@ -145,26 +284,40 @@ class Starburst:
             f"https://{self.connection_info.host}:{self.connection_info.port}/"
             + f"api/v1/dataProduct/products/{data_product.id}"
         )
-        headers = {"Accept": "application/json", "Content-Type": "application/json"}
+        headers = {
+            "Accept": APPLICATION_JSON_TEXT,
+            "Content-Type": APPLICATION_JSON_TEXT,
+        }
         auth = (self.connection_info.user, self.connection_info.password)
 
         response = requests.put(
-            url, headers=headers, auth=auth, json=data_product.to_dict(), verify=False
+            url,
+            headers=headers,
+            auth=auth,
+            json=data_product.to_dict(),
+            verify=STARBURST_SSL_VERIFICATION,
         )
 
         if response.status_code == 200:
-            print("Data product had been updated successfully")
+            print(f"Data product {data_product.name} had been updated successfully")
         elif response.status_code == 400:
-            print("Bad request")
+            print(f"Bad request when attempting to update domain {data_product.name}")
         elif response.status_code == 403:
-            print("Operation forbidden")
+            print(
+                f"Operation forbidden when attempting to update domain {data_product.name}"
+            )
         elif response.status_code == 404:
-            print("Operation not found")
+            print(
+                f"Operation not found when attempting to update domain {data_product.name}"
+            )
         elif response.status_code == 409:
-            print("Conflict appeared")
+            print(
+                f"Conflict appeared when attempting to update domain {data_product.name}"
+            )
         else:
             print(f"Failed to update data product. Status code: {response.status_code}")
         print(response.text)
+        return response.status_code
 
     def get_domain_by_id(self, domain_id: str, as_class: bool = False):
         """
@@ -201,30 +354,39 @@ class Starburst:
             + f"/api/v1/dataProduct/domains/{domain_id}"
         )
         headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
+            "Accept": APPLICATION_JSON_TEXT,
+            "Content-Type": APPLICATION_JSON_TEXT,
         }
         auth = (self.connection_info.user, self.connection_info.password)
 
-        response = requests.get(url, headers=headers, auth=auth, verify=False)
+        response = requests.get(
+            url, headers=headers, auth=auth, verify=STARBURST_SSL_VERIFICATION
+        )
+
+        domain = response.json()
 
         if response.status_code == 200:
-            domain_tag = response.json()
             if as_class:
                 return StarburstDomainInfo(
-                    name=domain_tag.get("name"),
-                    description=domain_tag.get("description"),
-                    schema_location=domain_tag.get("schemaLocation"),
+                    id=domain["id"],
+                    name=domain.get("name"),
+                    description=domain.get("description"),
+                    schema_location=domain.get("schemaLocation"),
+                    assigned_data_products=domain.get("assignedDataProducts"),
                 )
-            return domain_tag
+            return domain
         if response.status_code == 403:
-            print(f"Operation forbidden: {response}")
+            print(
+                f"Operation forbidden when attempting to get domain {domain.get('name')}: {response}"
+            )
         if response.status_code == 404:
-            print(f"Operation not found: {response}")
+            print(
+                f"Operation not found when attempting to get domain {domain.get('name')}: {response}"
+            )
 
         return None
 
-    def get_domain_by_name(self, domain_name: str, as_class: bool=False):
+    def get_domain_by_name(self, domain_name: str, as_class: bool = False):
         """
         Retrieves a domain by its name from the list of domains.
 
@@ -252,9 +414,11 @@ class Starburst:
             if domain["name"] == domain_name:
                 if as_class:
                     return StarburstDomainInfo(
+                        id=domain["id"],
                         name=domain["name"],
                         description=domain["description"],
                         schema_location=domain["schemaLocation"],
+                        assigned_data_products=domain["assignedDataProducts"],
                     )
                 return domain
 
@@ -265,62 +429,37 @@ class Starburst:
         self, domain_name: str, data_product_name: str, as_class: bool = False
     ):
         """
-    Retrieve a specific data product by name from a specified domain.
+        Retrieve a specific data product by name from a specified domain.
 
-    This method constructs an API URL and sends a GET request to retrieve the data product
-    identified by `data_product_name` within the domain specified by `domain_name`.
-    The method handles the response by either returning the JSON data of the product or
-    converting it to a DataProduct object if specified.
+        Args:
+            domain_name (str): The name of the domain where the data product is located.
+            data_product_name (str): The name of the data product to retrieve.
+            as_class (bool, optional): If True, return the data product information as a DataProduct object.
+                                    If False, return the data product information as a dictionary. Default is False.
 
-    Args:
-        domain_name (str): The name of the domain where the data product is located.
-        data_product_name (str): The name of the data product to retrieve.
-        as_class (bool, optional): If True, return the data product information as a
-                                   DataProduct object. If False, return the data product
-                                   information as a dictionary. Default is False.
+        Returns:
+            dict or DataProduct or None: If successful, returns the data product details as a dictionary or a
+                                        DataProduct object, depending on the value of `as_class`. If the product
+                                        is not found or another error occurs, prints an error message and returns None.
 
-    Returns:
-        dict or DataProduct or None: If successful, returns the data product details as a 
-                                     dictionary or a DataProduct object, depending on the value 
-                                     of `as_class`. If the product is not found or another error 
-                                     occurs, prints an error message and returns None.
-
-    Raises:
-        KeyError: If the domain is not found, which could interrupt the retrieval of the domain ID.
-    """
+        Raises:
+            KeyError: If the domain is not found, which could interrupt the retrieval of the domain ID.
+        """
         domain = self.get_domain_by_name(domain_name)
+        if not domain:
+            print(f"Domain {domain_name} not found.")
+            return None
 
-        if domain:
-            for data_product in domain["assignedDataProducts"]:
-                if data_product["name"] == data_product_name:
-                    url = (
-                        f"https://{self.connection_info.host}:{self.connection_info.port}"
-                        + f"/api/v1/dataProduct/products/{data_product['id']}"
-                    )
-                    headers = {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json",
-                    }
-                    auth = (self.connection_info.user, self.connection_info.password)
+        data_product = find_data_product(domain, data_product_name)
 
-                    response = requests.get(
-                        url, headers=headers, auth=auth, verify=False
-                    )
-
-                    if response.status_code == 200:
-                        if as_class:
-                            return data_product_json_to_class(response.json())
-                        return response.json()
-                    if response.status_code == 403:
-                        print(f"Operation forbidden: {response}")
-                    if response.status_code == 404:
-                        print(f"Operation not found: {response}")
-
+        if not data_product:
             print(
                 f"Data product {data_product_name} not found on domain {domain_name}."
             )
+            return None
 
-        return None
+        response = fetch_data_product(self.connection_info, data_product["id"])
+        return handle_fetch_data_product_response(response, as_class)
 
     def get_data_product_details(self, domain_name: str, data_product_name: str):
         """
@@ -348,7 +487,10 @@ class Starburst:
 
         if domain:
             url = f"https://{self.connection_info.host}:{self.connection_info.port}/api/v1/dataProduct/products"
-            headers = {"Accept": "application/json", "Content-Type": "application/json"}
+            headers = {
+                "Accept": APPLICATION_JSON_TEXT,
+                "Content-Type": APPLICATION_JSON_TEXT,
+            }
             auth = (self.connection_info.user, self.connection_info.password)
             search = {
                 "dataDomainIds": [domain["id"]],
@@ -357,7 +499,11 @@ class Starburst:
             data = {"searchOptions": json.dumps(search)}
 
             response = requests.get(
-                url, headers=headers, auth=auth, params=data, verify=False
+                url,
+                headers=headers,
+                auth=auth,
+                params=data,
+                verify=STARBURST_SSL_VERIFICATION,
             )
 
             if response.status_code == 200 and response.json():
@@ -382,8 +528,8 @@ class Starburst:
             domain_name (str): The name of the domain containing the data product.
             data_product_name (str): The name of the data product whose tags are to be retrieved.
             as_class (bool, optional): If True, return tags as a list of Tag objects.
-                                    If False, return tags as a list of dictionaries.
-                                    Default is False.
+                                        If False, return tags as a list of dictionaries.
+                                        Default is False.
 
         Returns:
             list: A list of tags for the specified data product. The format of the tags
@@ -397,51 +543,21 @@ class Starburst:
 
         Prints:
             str: Error messages if the operation is forbidden or not found.
-
-        Examples:
-            >>> get_data_product_tags("Sales", "ProductA")
-            [{'id': 1, 'value': 'important'}, {'id': 2, 'value': 'sensitive'}]
-
-            >>> get_data_product_tags("Sales", "ProductA", as_class=True)
-            [Tag(id=1, value='important'), Tag(id=2, value='sensitive')]
         """
         domain = self.get_domain_by_name(domain_name)
+        if not domain:
+            print(f"Domain {domain_name} not found.")
+            return None
 
-        if domain:
-            for data_product in domain["assignedDataProducts"]:
-                if data_product["name"] == data_product_name:
-                    url = (
-                        f"https://{self.connection_info.host}:{self.connection_info.port}"
-                        + f"/api/v1/dataProduct/tags/products/{data_product['id']}"
-                    )
-                    headers = {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json",
-                    }
-                    auth = (self.connection_info.user, self.connection_info.password)
-
-                    response = requests.get(
-                        url, headers=headers, auth=auth, verify=False
-                    )
-
-                    if response.status_code == 200:
-                        json_tag = response.json()
-                        if as_class:
-                            return [
-                                Tag(id=tag.get("id"), value=tag.get("value"))
-                                for tag in json_tag
-                            ]
-                        return json_tag
-                    if response.status_code == 403:
-                        print(f"Operation forbidden: {response}")
-                    if response.status_code == 404:
-                        print(f"Operation not found: {response}")
-
+        data_product = find_data_product(domain, data_product_name)
+        if not data_product:
             print(
-                f"Data product {data_product_name} not found on domain {domain_name}."
+                f"Data product {data_product_name} not found in domain {domain_name}."
             )
+            return None
 
-        return None
+        response = fetch_data_product_tags(self.connection_info, data_product["id"])
+        return process_fetch_data_product_tags_response(response, as_class)
 
     def list_domains(self):
         """
@@ -469,10 +585,15 @@ class Starburst:
             this option may need to be adjusted.
         """
         url = f"https://{self.connection_info.host}:{self.connection_info.port}/api/v1/dataProduct/domains"
-        headers = {"Accept": "application/json", "Content-Type": "application/json"}
+        headers = {
+            "Accept": APPLICATION_JSON_TEXT,
+            "Content-Type": APPLICATION_JSON_TEXT,
+        }
         auth = (self.connection_info.user, self.connection_info.password)
 
-        response = requests.get(url, headers=headers, auth=auth, verify=False)
+        response = requests.get(
+            url, headers=headers, auth=auth, verify=STARBURST_SSL_VERIFICATION
+        )
 
         if response.status_code == 200:
             return response.json()
@@ -514,12 +635,14 @@ class Starburst:
                 + f"/api/v1/dataProduct/domains/{domain['id']}"
             )
             headers = {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
+                "Accept": APPLICATION_JSON_TEXT,
+                "Content-Type": APPLICATION_JSON_TEXT,
             }
             auth = (self.connection_info.user, self.connection_info.password)
 
-            response = requests.delete(url, headers=headers, auth=auth, verify=False)
+            response = requests.delete(
+                url, headers=headers, auth=auth, verify=STARBURST_SSL_VERIFICATION
+            )
 
             if response.status_code == 204:
                 print(f"Domain {domain_name} had been successfully deleted")
@@ -533,7 +656,10 @@ class Starburst:
                 print(response.text)
 
     def delete_data_product(
-        self, domain_name: str, data_product_name: str, delete_product_ressources: str="false"
+        self,
+        domain_name: str,
+        data_product_name: str,
+        delete_product_ressources: str = "false",
     ):
         """
         Deletes a specified data product within a given domain.
@@ -569,8 +695,8 @@ class Starburst:
                 + f"/api/v1/dataProduct/products/{data_product['id']}/workflows/delete"
             )
             headers = {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
+                "Accept": APPLICATION_JSON_TEXT,
+                "Content-Type": APPLICATION_JSON_TEXT,
             }
 
             if delete_product_ressources not in ("false", "true"):
@@ -582,7 +708,11 @@ class Starburst:
             auth = (self.connection_info.user, self.connection_info.password)
 
             response = requests.post(
-                url, headers=headers, auth=auth, params=json.dumps(params), verify=False
+                url,
+                headers=headers,
+                auth=auth,
+                params=json.dumps(params),
+                verify=STARBURST_SSL_VERIFICATION,
             )
 
             if response.status_code == 202:
@@ -591,7 +721,7 @@ class Starburst:
                     + f" {domain_name} had been successfully deleted"
                 )
             elif response.status_code == 403:
-                print("Deletion forbidden")
+                print(f"Deletion forbidden for data product {data_product_name}")
             else:
 
                 print(
@@ -600,7 +730,9 @@ class Starburst:
                 )
             print(response.text)
 
-    def publish_data_product(self, domain_name: str, data_product_name: str, force: str="false"):
+    def publish_data_product(
+        self, domain_name: str, data_product_name: str, force: str = "false"
+    ):
         """
         Publishes a specified data product within a given domain.
 
@@ -632,8 +764,8 @@ class Starburst:
                 + f"/api/v1/dataProduct/products/{data_product['id']}/workflows/publish"
             )
             headers = {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
+                "Accept": APPLICATION_JSON_TEXT,
+                "Content-Type": APPLICATION_JSON_TEXT,
             }
 
             if force not in ("false", "true"):
@@ -643,7 +775,11 @@ class Starburst:
             auth = (self.connection_info.user, self.connection_info.password)
 
             response = requests.post(
-                url, headers=headers, auth=auth, params=json.dumps(params), verify=False
+                url,
+                headers=headers,
+                auth=auth,
+                params=json.dumps(params),
+                verify=STARBURST_SSL_VERIFICATION,
             )
 
             if response.status_code == 202:
@@ -652,9 +788,11 @@ class Starburst:
                     + f" {domain_name} had been successfully publish"
                 )
             elif response.status_code == 403:
-                print("Publish forbidden")
+                print(f"Publish forbidden for data product {data_product_name}")
             elif response.status_code == 404:
-                print("Operation not found")
+                print(
+                    "Operation not found when attempting to publish data product {data_product_name}"
+                )
             else:
 
                 print(
@@ -663,7 +801,12 @@ class Starburst:
                 )
             print(response.text)
 
-    def execute_query(self, query: str, to_pandas: bool=True, verify_ssl: bool=False):
+    def execute_query(
+        self,
+        query: str,
+        to_pandas: bool = True,
+        verify_ssl: bool = STARBURST_SSL_VERIFICATION,
+    ):
         """
         Executes an SQL query on the Starburst (Trino) database and returns the results.
 
@@ -748,6 +891,11 @@ class Starburst:
         """
         inc = "" if options.get("incremental_column") else "--"
         part = "" if options.get("partitioned_by") else "--"
+
+        partitioned_by = options.get("partitioned_by", "").split(",")
+        partitioned_by = [f"'{item.strip()}'" for item in partitioned_by]
+        partitioned_by = ",".join(partitioned_by)
+
         mv_query = f"""
         CREATE MATERIALIZED VIEW {view_name}
         COMMENT '{options.get("comment", " ")}'
@@ -756,7 +904,7 @@ class Starburst:
         grace_period = '{options.get("grace_period",'10.00m')}',
         {inc}incremental_column = '{options.get("incremental_column")}',
         max_import_duration = '{options.get("grace_period",'1.00h')}',
-        {part}partitioned_by = ARRAY[{options.get("partitioned_by", '')}],
+        {part}partitioned_by = ARRAY[{partitioned_by}],
         run_as_invoker = {options.get("run_as_invoker",'false')}
         ) AS
         {query}

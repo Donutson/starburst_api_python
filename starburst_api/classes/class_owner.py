@@ -31,7 +31,9 @@ class Owner:
     def __str__(self) -> str:
         return f"({self.name}: {self.email})"
 
-    def _validate_string(self, value: str, attribute_name: str, min_length=None, max_length=None):
+    def _validate_string(
+        self, value: str, attribute_name: str, min_length=None, max_length=None
+    ):
         """Validate string attributes."""
         if not isinstance(value, str):
             raise ValueError(f"{attribute_name} must be a string.")

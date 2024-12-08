@@ -33,12 +33,13 @@ class Tag:
 
     def _validate_uuid(self, value: str, attribute_name: str):
         """Validate UUID attributes."""
-        if value is not None:
-            if not isinstance(value, str):
-                raise ValueError(f"{attribute_name} must be a string (UUID).")
-            # Add additional UUID validation logic if needed
+        if value is not None and not isinstance(value, str):
+            raise ValueError(f"{attribute_name} must be a string (UUID).")
+        # Add additional UUID validation logic if needed
 
-    def _validate_string(self, value: str, attribute_name: str, min_length=None, max_length=None):
+    def _validate_string(
+        self, value: str, attribute_name: str, min_length=None, max_length=None
+    ):
         """Validate string attributes."""
         if not isinstance(value, str):
             raise ValueError(f"{attribute_name} must be a string.")

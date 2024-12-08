@@ -51,7 +51,7 @@ class DatasetMaterializedView(DatasetView):
             "name": self.name,
             "description": self.description,
             "definitionQuery": self.definition_query,
-            "markedForDeletion": self.description,
+            "markedForDeletion": self.marked_for_deletion,
             "columns": [column.to_dict() for column in self.columns],
             "definitionProperties": self.definition_properties.to_dict(),
         }

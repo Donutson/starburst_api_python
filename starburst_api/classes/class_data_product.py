@@ -57,7 +57,13 @@ class DataProduct:
         self.owners = options.get("owners", [])
         self.relevant_links = options.get("relevant_links", [])
 
-    def _validate_string(self, value: str, attribute_name: str, min_length: int=None, max_length: int=None):
+    def _validate_string(
+        self,
+        value: str,
+        attribute_name: str,
+        min_length: int = None,
+        max_length: int = None,
+    ):
         """Validate string attributes."""
         if value is not None:
             if not isinstance(value, str):
@@ -73,9 +79,8 @@ class DataProduct:
 
     def _validate_uuid(self, value: str, attribute_name: str):
         """Validate UUID attributes."""
-        if value is not None:
-            if not isinstance(value, str):
-                raise ValueError(f"{attribute_name} must be a string (UUID).")
+        if value is not None and not isinstance(value, str):
+            raise ValueError(f"{attribute_name} must be a string (UUID).")
             # Add additional UUID validation logic if needed
 
     def to_dict(self) -> dict:
