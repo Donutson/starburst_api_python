@@ -23,7 +23,7 @@ jobs:
         pip install sphinx sphinx-rtd-theme
 
     - name: Build documentation
-      run: sphinx-build -b html source/ docs/
+      run: sphinx-build -b html docs_source/source/ docs/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
