@@ -278,7 +278,7 @@ class Starburst:
 
             - The data product instance must have a valid 'id' that exists on the server.
             - Ensure that the 'DataProduct' class has a 'to_dict' method which correctly
-            
+
             serializes the data product's attributes to a dictionary.
         """
         url = (
@@ -927,7 +927,7 @@ class Starburst:
             view_name (str): The name to assign to the view. This name must be unique within the database or schema
                             unless it is replacing an existing view.
             **options (dict): Optional keyword arguments to further customize the view:
-                
+
                 - comment (str): A comment to describe the view, providing context or documentation for
                                 future reference. Default is an empty space if not specified.
 

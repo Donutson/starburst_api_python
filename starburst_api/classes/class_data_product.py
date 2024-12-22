@@ -32,7 +32,7 @@ class DataProduct:
             summary (str): Summary description for this data product.
             **options: Additional options to specify id, description, views, materialized_views, owners,
             and relevant_links.
-            
+
         Raises:
             ValueError: If any of the attributes violate the specified constraints.
         """
