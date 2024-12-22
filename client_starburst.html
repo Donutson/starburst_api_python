@@ -55,7 +55,26 @@
 <li class="toctree-l1"><a class="reference internal" href="dataset_materialized_view.html">Dataset Materialized View</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_product.html">Data Product</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Client Starburst</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#classes.class_starburst.Starburst"><code class="docutils literal notranslate"><span class="pre">Starburst</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classes.class_starburst.Starburst"><code class="docutils literal notranslate"><span class="pre">Starburst</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.create_data_product"><code class="docutils literal notranslate"><span class="pre">Starburst.create_data_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.create_domain"><code class="docutils literal notranslate"><span class="pre">Starburst.create_domain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.create_mv_view"><code class="docutils literal notranslate"><span class="pre">Starburst.create_mv_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.create_view"><code class="docutils literal notranslate"><span class="pre">Starburst.create_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.create_view_from_config"><code class="docutils literal notranslate"><span class="pre">Starburst.create_view_from_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.delete_data_product"><code class="docutils literal notranslate"><span class="pre">Starburst.delete_data_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.delete_domain_by_name"><code class="docutils literal notranslate"><span class="pre">Starburst.delete_domain_by_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.execute_query"><code class="docutils literal notranslate"><span class="pre">Starburst.execute_query()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.get_data_product"><code class="docutils literal notranslate"><span class="pre">Starburst.get_data_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.get_data_product_details"><code class="docutils literal notranslate"><span class="pre">Starburst.get_data_product_details()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.get_data_product_tags"><code class="docutils literal notranslate"><span class="pre">Starburst.get_data_product_tags()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.get_domain_by_id"><code class="docutils literal notranslate"><span class="pre">Starburst.get_domain_by_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.get_domain_by_name"><code class="docutils literal notranslate"><span class="pre">Starburst.get_domain_by_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.list_domains"><code class="docutils literal notranslate"><span class="pre">Starburst.list_domains()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.publish_data_product"><code class="docutils literal notranslate"><span class="pre">Starburst.publish_data_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.update_data_product"><code class="docutils literal notranslate"><span class="pre">Starburst.update_data_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_starburst.Starburst.update_domain"><code class="docutils literal notranslate"><span class="pre">Starburst.update_domain()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -96,6 +115,578 @@
 <dd class="field-odd"><p><strong>connection_info</strong> (<a class="reference internal" href="starburst_connection.html#classes.class_starburst_connection_info.StarburstConnectionInfo" title="classes.class_starburst_connection_info.StarburstConnectionInfo"><em>StarburstConnectionInfo</em></a>) – to establish a connection with Starburst.</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.create_data_product">
+<span class="sig-name descname"><span class="pre">create_data_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_product</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataProduct</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.create_data_product" title="Link to this definition"></a></dt>
+<dd><p>Creates a data product on the server by sending a POST request to the API.</p>
+<p>This method constructs a URL to the data products endpoint and sends a POST request
+with the data product’s information in JSON format. The method uses basic authentication
+and handles the server’s response, printing success or failure messages based on the
+response status code received.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_product</strong> (<a class="reference internal" href="data_product.html#classes.class_data_product.DataProduct" title="classes.class_data_product.DataProduct"><em>DataProduct</em></a>) – The DataProduct object to be created. The object should have
+methods for serializing itself to a dictionary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>This method does not return anything but prints messages to indicate the status</dt><dd><p>of the request.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.create_domain">
+<span class="sig-name descname"><span class="pre">create_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StarburstDomainInfo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.create_domain" title="Link to this definition"></a></dt>
+<dd><p>Create a domain in Starburst.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>domain</strong> (<em>StarburstDomain</em>) – The domain object to be created.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.create_mv_view">
+<span class="sig-name descname"><span class="pre">create_mv_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cron</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.create_mv_view" title="Link to this definition"></a></dt>
+<dd><p>Creates a materialized view in the database with specified properties and scheduling.</p>
+<p>This method constructs and executes a SQL command to create a materialized view based on the given SQL query
+and scheduling parameters. It supports various options to customize the materialized view, such as
+incremental updates, partitioning, and a comment describing the view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – The SQL query that defines the materialized view’s data.</p></li>
+<li><p><strong>view_name</strong> (<em>str</em>) – The name to assign to the materialized view.</p></li>
+<li><p><strong>cron</strong> (<em>str</em>) – A cron expression that defines the refresh schedule for the materialized view.</p></li>
+<li><p><strong>**options</strong> (<em>dict</em>) – Optional keyword arguments to further customize the materialized view:
+- comment (str): A comment to describe the materialized view. Defaults to an empty space.
+- grace_period (str): The grace period for late data handling, default is ‘10.00m’.
+- incremental_column (str): Column to use for incremental loading. If not provided, the view is not incremental.
+- max_import_duration (str): Maximum duration that the incremental import process is allowed to take, default is ‘1.00h’.
+- partitioned_by (list of str): A list of columns by which the view is to be partitioned. Provide as a string like ‘col1, col2’.
+- run_as_invoker (bool or str): Whether to run the view refresh as the invoker’s identity, default is ‘false’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the execute_query method, which may vary based on the underlying database and method implementation.
+Typically, this would be the raw result of the execution if <cite>to_pandas</cite> is False.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_mv_view</span><span class="p">(</span>
+<span class="go">    &quot;SELECT * FROM minio.test.orders WHERE order_date &gt;= CURRENT_DATE - INTERVAL &#39;1&#39; DAY&quot;,</span>
+<span class="go">    &quot;daily_orders&quot;,</span>
+<span class="go">    &quot;0 0 * * *&quot;,</span>
+<span class="go">    comment=&quot;Daily orders view&quot;,</span>
+<span class="go">    grace_period=&quot;15.00m&quot;,</span>
+<span class="go">    incremental_column=&quot;order_date&quot;,</span>
+<span class="go">    partitioned_by=&quot;order_date&quot;,</span>
+<span class="go">    run_as_invoker=&#39;true&#39;</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The cron expression must be properly formatted according to the database’s expected standards. Ensure that
+any optional parameters are provided in accordance with how they should be applied in the SQL command.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.create_view">
+<span class="sig-name descname"><span class="pre">create_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.create_view" title="Link to this definition"></a></dt>
+<dd><p>Creates a SQL view with a specified name and query, including optional custom settings.</p>
+<p>This method constructs and executes a SQL command to create a view based on the given SQL query.
+It allows for the addition of an optional comment to describe the view, which can be included through keyword arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – The SQL query that defines the view’s data. This query should be a valid SQL statement
+that typically selects data from one or more tables.</p></li>
+<li><p><strong>view_name</strong> (<em>str</em>) – The name to assign to the view. This name must be unique within the database or schema
+unless it is replacing an existing view.</p></li>
+<li><p><strong>**options</strong> (<em>dict</em>) – <p>Optional keyword arguments to further customize the view:
+- comment (str): A comment to describe the view, providing context or documentation for</p>
+<blockquote>
+<div><p>future reference. Default is an empty space if not specified.</p>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the execute_query method, which might be a success message, error message, or any
+other data depending on the implementation of <cite>execute_query</cite>. The result will indicate whether
+the view creation was successful or if there were errors.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_view</span><span class="p">(</span>
+<span class="go">    &quot;SELECT customer_id, sum(price) FROM sales GROUP BY customer_id&quot;,</span>
+<span class="go">    &quot;minio.test.view_customer_sales&quot;,</span>
+<span class="go">    comment=&quot;Shows total sales by customer&quot;</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The caller must ensure that the provided SQL query is syntactically correct and that the <cite>view_name</cite>
+does not conflict with existing names in the same namespace unless the intent is to replace an existing view.
+Optional parameters like ‘comment’ must be properly formatted as valid SQL comments.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.create_view_from_config">
+<span class="sig-name descname"><span class="pre">create_view_from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">views_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.create_view_from_config" title="Link to this definition"></a></dt>
+<dd><p>Creates views from the provided configuration using a Starburst connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>list</em>) – List of view configuration dictionaries.</p></li>
+<li><p><strong>views_dir</strong> (<em>str</em>) – Directory containing view configuration files.</p></li>
+<li><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, stops execution on the first error. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.delete_data_product">
+<span class="sig-name descname"><span class="pre">delete_data_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_product_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_product_ressources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'false'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.delete_data_product" title="Link to this definition"></a></dt>
+<dd><p>Deletes a specified data product within a given domain.</p>
+<p>This method sends a request to delete a data product from the specified domain.
+It optionally skips deleting the underlying resources in Trino based on the <cite>delete_product_resources</cite>
+parameter. The function first retrieves the data product to ensure it exists. If found, it proceeds
+to send a deletion request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain_name</strong> (<em>str</em>) – The domain in which the data product is located.</p></li>
+<li><p><strong>data_product_name</strong> (<em>str</em>) – The name of the data product to be deleted.</p></li>
+<li><p><strong>delete_product_resources</strong> (<em>str</em>) – A string, either ‘true’ or ‘false’, that specifies whether to
+skip deleting the Trino resources associated with the data product.
+‘false’ by default, which implies resources will also be deleted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the ‘delete_product_resources’ parameter is not ‘true’ or ‘false’.</p></li>
+<li><p><strong>Exception</strong> – If there are problems with the network, server, or other operational issues.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>This method prints the outcome of the delete operation, including success messages and any</dt><dd><p>HTTP errors encountered, but does not return any values.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Prints:</dt><dd><dl class="simple">
+<dt>str: Outputs the status of the operation to the console, indicating success, denial of permissions,</dt><dd><p>or other errors encountered.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.delete_domain_by_name">
+<span class="sig-name descname"><span class="pre">delete_domain_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.delete_domain_by_name" title="Link to this definition"></a></dt>
+<dd><p>Delete a domain by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>domain_name</strong> (<em>str</em>) – The name of the domain to be deleted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method retrieves the list of domains using the <cite>list_domains</cite> method.
+It then iterates over the domains to find the one with a matching name.
+Once found, it constructs the URL for the DELETE request using the domain’s ID.
+The DELETE request is sent to the server with the appropriate headers and authentication.
+If the request is successful (status code 204), a success message is printed.
+If the request fails due to insufficient permissions (status code 403),
+a relevant message is printed.
+If the request fails for any other reason,
+an error message along with the status code and response text is printed.
+If no domain with the specified name is found,
+a message indicating the absence of the domain is printed.
+It’s important to note that the use of ‘verify=False’
+in the request is for skipping SSL certificate verification.
+Depending on the server configuration and security requirements,
+this option may need to be adjusted.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.execute_query">
+<span class="sig-name descname"><span class="pre">execute_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_pandas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verify_ssl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.execute_query" title="Link to this definition"></a></dt>
+<dd><p>Executes an SQL query on the Starburst (Trino) database and returns the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – The SQL query to execute.</p></li>
+<li><p><strong>to_pandas</strong> (<em>bool</em>) – If True, returns the results as a pandas DataFrame,
+otherwise returns a SQLAlchemy ResultProxy object.</p></li>
+<li><p><strong>verify_ssl</strong> (<em>bool</em>) – If True, SSL certificates will be verified. If False, SSL
+certificates will not be verified. Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The results of the SQL query,</dt><dd><p>depending on the to_pandas argument.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame or sqlalchemy.engine.result.ResultProxy</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Description:</dt><dd><p>This method constructs a connection string using the credentials and connection information
+stored in the object, creates an SQLAlchemy engine, and connects to execute the given SQL query.
+Depending on the value of the to_pandas argument, it either returns the raw results wrapped in a
+SQLAlchemy ResultProxy, which can be iterated over, or converts the results into a pandas DataFrame,
+which is useful for further data manipulation and analysis.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.get_data_product">
+<span class="sig-name descname"><span class="pre">get_data_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_product_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.get_data_product" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a specific data product by name from a specified domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain_name</strong> (<em>str</em>) – The name of the domain where the data product is located.</p></li>
+<li><p><strong>data_product_name</strong> (<em>str</em>) – The name of the data product to retrieve.</p></li>
+<li><p><strong>as_class</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return the data product information as a DataProduct object.
+If False, return the data product information as a dictionary. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>If successful, returns the data product details as a dictionary or a</dt><dd><p>DataProduct object, depending on the value of <cite>as_class</cite>. If the product
+is not found or another error occurs, prints an error message and returns None.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or <a class="reference internal" href="data_product.html#classes.class_data_product.DataProduct" title="classes.class_data_product.DataProduct">DataProduct</a> or None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the domain is not found, which could interrupt the retrieval of the domain ID.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.get_data_product_details">
+<span class="sig-name descname"><span class="pre">get_data_product_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_product_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.get_data_product_details" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a specific data product details by name from a specified domain.</p>
+<p>This method constructs an API URL and sends a GET request to retrieve the data product
+identified by <cite>data_product_name</cite> within the domain specified by <cite>domain_name</cite>.
+The method formats the search criteria into the appropriate JSON structure
+and handles the response by either returning the JSON data of the product or
+by printing an error message if the product is not found or if an error occurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain_name</strong> (<em>str</em>) – The name of the domain where the data product is located.</p></li>
+<li><p><strong>data_product_name</strong> (<em>str</em>) – The name of the data product to retrieve.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>If successful, returns the JSON response containing the data product details.</dt><dd><p>If the product is not found or another error occurs, prints an error message and
+returns the HTTP status code.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the domain is not found, which could interrupt the retrieval of the domain ID.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.get_data_product_tags">
+<span class="sig-name descname"><span class="pre">get_data_product_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_product_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.get_data_product_tags" title="Link to this definition"></a></dt>
+<dd><p>Retrieve tags for a specific data product within a domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain_name</strong> (<em>str</em>) – The name of the domain containing the data product.</p></li>
+<li><p><strong>data_product_name</strong> (<em>str</em>) – The name of the data product whose tags are to be retrieved.</p></li>
+<li><p><strong>as_class</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return tags as a list of Tag objects.
+If False, return tags as a list of dictionaries.
+Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A list of tags for the specified data product. The format of the tags</dt><dd><p>depends on the value of <cite>as_class</cite>:
+- If <cite>as_class</cite> is True: Returns a list of Tag objects.
+- If <cite>as_class</cite> is False: Returns a list of dictionaries.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the domain or data product is not found.</p></li>
+<li><p><strong>requests.exceptions.RequestException</strong> – If an error occurs during the HTTP request.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Prints:</dt><dd><p>str: Error messages if the operation is forbidden or not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.get_domain_by_id">
+<span class="sig-name descname"><span class="pre">get_domain_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.get_domain_by_id" title="Link to this definition"></a></dt>
+<dd><p>Retrieve information about a domain by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain_id</strong> (<em>str</em>) – The ID of the domain to retrieve.</p></li>
+<li><p><strong>as_class</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return the domain information as a
+StarburstDomainInfo object. If False, return
+the domain information as a dictionary.
+Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The domain information. The format depends on</dt><dd><p>the value of <cite>as_class</cite>:
+- If <cite>as_class</cite> is True: Returns a StarburstDomainInfo object.
+- If <cite>as_class</cite> is False: Returns a dictionary.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="domain_info.html#classes.class_starburst_domain_info.StarburstDomainInfo" title="classes.class_starburst_domain_info.StarburstDomainInfo">StarburstDomainInfo</a> or dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>requests.exceptions.RequestException</strong> – If an error occurs during the HTTP request.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Prints:</dt><dd><p>str: Error messages if the operation is forbidden or not found.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_domain_by_id</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">)</span>
+<span class="go">{&#39;name&#39;: &#39;Sales&#39;, &#39;description&#39;: &#39;Sales data domain&#39;, &#39;schemaLocation&#39;: &#39;s3://sales-data&#39;}</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_domain_by_id</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="n">as_class</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">StarburstDomainInfo(name=&#39;Sales&#39;, description=&#39;Sales data domain&#39;, schema_location=&#39;s3://sales-data&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.get_domain_by_name">
+<span class="sig-name descname"><span class="pre">get_domain_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.get_domain_by_name" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a domain by its name from the list of domains.</p>
+<p>This method searches through the list of domains obtained from <cite>list_domains()</cite> method.
+It compares each domain’s ‘name’ attribute with the provided <cite>domain_name</cite>.
+If a match is found,it returns the domain.
+If no match is found, it prints a message and returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain_name</strong> (<em>str</em>) – The name of the domain to search for.</p></li>
+<li><p><strong>as_class</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return the domain information as a
+StarburstDomainInfo object. If False, return
+the domain information as a dictionary.
+Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The domain information. The format depends on</dt><dd><p>the value of <cite>as_class</cite>:
+- If <cite>as_class</cite> is True: Returns a StarburstDomainInfo object.
+- If <cite>as_class</cite> is False: Returns a dictionary.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="domain_info.html#classes.class_starburst_domain_info.StarburstDomainInfo" title="classes.class_starburst_domain_info.StarburstDomainInfo">StarburstDomainInfo</a> or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.list_domains">
+<span class="sig-name descname"><span class="pre">list_domains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.list_domains" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a list of domains from the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>If the request is successful, returns a dictionary containing domain information.</dt><dd><p>If the request fails, returns the status code (int) of the response.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict or int</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>(</strong><strong>optional</strong><strong>) </strong><strong>Exception</strong> – Any additional exceptions that may occur during the execution of the method.
+    For example, if there’s an issue with the network or authentication.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method sends a GET request to the server to retrieve the list of domains.
+The URL, headers, and authentication details are obtained from the connection information provided
+during the initialization of the class instance.
+If the request is successful (status code 200),
+the JSON response containing domain information is returned.
+If the request fails, the status code of the response is printed along
+with any error message received.
+It’s important to note that the use of ‘verify=False’ in the request is
+for skipping SSL certificate verification.
+Depending on the server configuration and security requirements,
+this option may need to be adjusted.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.publish_data_product">
+<span class="sig-name descname"><span class="pre">publish_data_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_product_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'false'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.publish_data_product" title="Link to this definition"></a></dt>
+<dd><p>Publishes a specified data product within a given domain.</p>
+<p>This method attempts to publish a data product by sending a POST request to the data product’s publish API endpoint.
+The function first retrieves the data product using <cite>get_data_product</cite> to ensure it exists. If found, it proceeds
+to send a publish request with an optional ‘force’ parameter to override any existing data conflicts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain_name</strong> (<em>str</em>) – The domain in which the data product is located.</p></li>
+<li><p><strong>data_product_name</strong> (<em>str</em>) – The name of the data product to be published.</p></li>
+<li><p><strong>force</strong> (<em>str</em>) – A string, either ‘true’ or ‘false’, that forces the publishing process to override conflicts.
+Default is ‘false’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the ‘force’ parameter is not ‘true’ or ‘false’.</p></li>
+<li><p><strong>Exception</strong> – If there are problems with the network, server, or other operational issues.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>This method prints the outcome of the publish operation, including success messages and any HTTP</dt><dd><p>errors encountered, but does not return any values.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Prints:</dt><dd><p>str: Outputs the status of the operation to the console, indicating success or the type of error encountered.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.update_data_product">
+<span class="sig-name descname"><span class="pre">update_data_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_product</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataProduct</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.update_data_product" title="Link to this definition"></a></dt>
+<dd><p>Updates a specific data product on the server using a HTTP PUT request.</p>
+<p>This method sends a JSON representation of the DataProduct instance to the server
+to update the existing data product. The method constructs a URL targeting the
+specific data product by its ID and sends the updated data as JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_product</strong> (<a class="reference internal" href="data_product.html#classes.class_data_product.DataProduct" title="classes.class_data_product.DataProduct"><em>DataProduct</em></a>) – The data product instance to update. This object
+must have an ‘id’ attribute and a ‘to_dict()’ method
+that serializes its properties to a dictionary format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Int: Status code of the operation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Prints messages to the console based on the HTTP status code returned by the
+server:
+- 200: Update successful.
+- 400: Bad request (e.g., malformed request body).
+- 403: Operation forbidden (e.g., insufficient permissions).
+- 404: Data product not found on the server.
+- 409: Conflict (e.g., concurrent modification conflict).
+- Other codes: Generic failure message with the status code.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_product</span> <span class="o">=</span> <span class="n">DataProduct</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;123&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;New Name&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">update_data_product</span><span class="p">(</span><span class="n">data_product</span><span class="p">)</span>
+<span class="go">Data product has been updated successfully.</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The data product instance must have a valid ‘id’ that exists on the server.</p></li>
+<li><p>Ensure that the ‘DataProduct’ class has a ‘to_dict’ method which correctly</p></li>
+</ul>
+<p>serializes the data product’s attributes to a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="classes.class_starburst.Starburst.update_domain">
+<span class="sig-name descname"><span class="pre">update_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">StarburstDomainInfo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst.Starburst.update_domain" title="Link to this definition"></a></dt>
+<dd><p>Update a domain’s configuration in the Starburst Data Product system.</p>
+<p>This function sends a PUT request to the Starburst API to update the domain specified by <cite>domain.id</cite>.
+It handles different HTTP response status codes to provide appropriate feedback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>domain</strong> (<a class="reference internal" href="domain_info.html#classes.class_starburst_domain_info.StarburstDomainInfo" title="classes.class_starburst_domain_info.StarburstDomainInfo"><em>StarburstDomainInfo</em></a>) – The domain information to update.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The HTTP status code of the response.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming StarburstConnectionInfo, StarburstDomainInfo, DataProduct, etc. are already defined</span>
