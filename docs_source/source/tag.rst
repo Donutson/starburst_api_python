@@ -1,4 +1,4 @@
-Relevant Link
+Relevant Tag
 =========================
 
 .. autoclass:: classes.class_tag.Tag
