@@ -53,6 +53,14 @@
 <li class="toctree-l1"><a class="reference internal" href="definition_properties.html">Definition Properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_column.html">Dataset Column</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Dataset View</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classes.class_dataset_view.DatasetView"><code class="docutils literal notranslate"><span class="pre">DatasetView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_dataset_view.DatasetView.name"><code class="docutils literal notranslate"><span class="pre">DatasetView.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_dataset_view.DatasetView.description"><code class="docutils literal notranslate"><span class="pre">DatasetView.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_dataset_view.DatasetView.definition_query"><code class="docutils literal notranslate"><span class="pre">DatasetView.definition_query</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_dataset_view.DatasetView.columns"><code class="docutils literal notranslate"><span class="pre">DatasetView.columns</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_dataset_view.DatasetView.marked_for_deletion"><code class="docutils literal notranslate"><span class="pre">DatasetView.marked_for_deletion</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 </ul>
 </li>
@@ -87,6 +95,81 @@
              
   <section id="dataset-view">
 <h1>Dataset View<a class="headerlink" href="#dataset-view" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="classes.class_dataset_view.DatasetView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">classes.class_dataset_view.</span></span><span class="sig-name descname"><span class="pre">DatasetView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_dataset_view.DatasetView" title="Link to this definition"></a></dt>
+<dd><p>Represents a view of a dataset.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_dataset_view.DatasetView.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#classes.class_dataset_view.DatasetView.name" title="Link to this definition"></a></dt>
+<dd><p>The name of the dataset view.
+It must be a valid SQL name with lowercase letters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_dataset_view.DatasetView.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#classes.class_dataset_view.DatasetView.description" title="Link to this definition"></a></dt>
+<dd><p>A description of the dataset view. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_dataset_view.DatasetView.definition_query">
+<span class="sig-name descname"><span class="pre">definition_query</span></span><a class="headerlink" href="#classes.class_dataset_view.DatasetView.definition_query" title="Link to this definition"></a></dt>
+<dd><p>The SQL query defining the dataset view. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_dataset_view.DatasetView.columns">
+<span class="sig-name descname"><span class="pre">columns</span></span><a class="headerlink" href="#classes.class_dataset_view.DatasetView.columns" title="Link to this definition"></a></dt>
+<dd><p>List of columns in the dataset view. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="dataset_column.html#classes.class_dataset_column.DatasetColumn" title="classes.class_dataset_column.DatasetColumn">DatasetColumn</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_dataset_view.DatasetView.marked_for_deletion">
+<span class="sig-name descname"><span class="pre">marked_for_deletion</span></span><a class="headerlink" href="#classes.class_dataset_view.DatasetView.marked_for_deletion" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the dataset view is marked for deletion. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialize a DatasetView object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the dataset view. It must be a valid SQL name with lowercase letters.</p></li>
+<li><p><strong>**options</strong> – Additional options to specify description, definition_query, columns, and marked_for_deletion.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided name violates the specified constraint
+    or if columns is not a list of DatasetColumn objects.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <section id="usage-example">
 <h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
 <p>Here’s an example of how to create and use a <cite>DatasetView</cite> object:</p>

@@ -54,6 +54,10 @@
 <li class="toctree-l1"><a class="reference internal" href="dataset_column.html">Dataset Column</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_view.html">Dataset View</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Dataset Materialized View</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classes.class_dataset_materialized_view.DatasetMaterializedView"><code class="docutils literal notranslate"><span class="pre">DatasetMaterializedView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_dataset_materialized_view.DatasetMaterializedView.definition_properties"><code class="docutils literal notranslate"><span class="pre">DatasetMaterializedView.definition_properties</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 </ul>
 </li>
@@ -87,6 +91,38 @@
              
   <section id="dataset-materialized-view">
 <h1>Dataset Materialized View<a class="headerlink" href="#dataset-materialized-view" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="classes.class_dataset_materialized_view.DatasetMaterializedView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">classes.class_dataset_materialized_view.</span></span><span class="sig-name descname"><span class="pre">DatasetMaterializedView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_dataset_materialized_view.DatasetMaterializedView" title="Link to this definition"></a></dt>
+<dd><p>Represents a materialized view of a dataset.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_dataset_materialized_view.DatasetMaterializedView.definition_properties">
+<span class="sig-name descname"><span class="pre">definition_properties</span></span><a class="headerlink" href="#classes.class_dataset_materialized_view.DatasetMaterializedView.definition_properties" title="Link to this definition"></a></dt>
+<dd><p>The definition properties for the materialized view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="definition_properties.html#classes.class_definition_properties.DefinitionProperties" title="classes.class_definition_properties.DefinitionProperties">DefinitionProperties</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialize a DatasetMaterializedView object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the dataset materialized view.</p></li>
+<li><p><strong>**options</strong> – Additional options to specify description, definition_query, columns,
+marked_for_deletion, and definition_properties.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided name violates the specified constraint
+    or if columns is not a list of DatasetColumn objects
+    or if the definition_properties are not valid.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <section id="usage-example">
 <h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
 <p>Here’s an example of how to create and use a <cite>DatasetMaterializedView</cite> object:</p>
