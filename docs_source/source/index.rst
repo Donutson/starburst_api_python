@@ -14,3 +14,4 @@
    relevant_link
    tag
    definition_properties
+   dataset_column
