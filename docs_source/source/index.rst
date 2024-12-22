@@ -12,3 +12,4 @@
    domain_info
    owner
    relevant_link
+   tag

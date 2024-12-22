@@ -3,6 +3,11 @@ Relevant Link
 
 .. autoclass:: classes.class_starburst_relevant_link.RelevantLink
 
+Usage Example
+-------------
+
+Here’s how to create and use a `RelevantLink` object:
+
 .. code-block:: python
     
         from starburst_api.classes import RelevantLink
