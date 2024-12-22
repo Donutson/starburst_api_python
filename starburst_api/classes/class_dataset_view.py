@@ -1,6 +1,7 @@
 """
 DatasetView class
 """
+
 import re
 
 from starburst_api.classes.class_dataset_column import DatasetColumn

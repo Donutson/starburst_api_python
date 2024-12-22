@@ -1,6 +1,7 @@
 """
 Class to interact with a starburst instance
 """
+
 import json
 import pandas as pd
 import requests

@@ -1,6 +1,7 @@
 """
 DefinitionProperties class
 """
+
 import re
 
 

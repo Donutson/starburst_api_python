@@ -1,6 +1,7 @@
 """
 DatasetView class
 """
+
 from starburst_api.classes.class_dataset_view import DatasetView
 from starburst_api.classes.class_definition_properties import DefinitionProperties
 
