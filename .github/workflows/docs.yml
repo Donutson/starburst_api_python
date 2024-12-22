@@ -19,7 +19,7 @@ jobs:
         python-version: '3.x'
     
     - name: Specify Python path
-      run: echo "PYTHONPATH=$(pwd)/starburst_api" >> $GITHUB_ENV
+      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
 
     - name: Install dependencies
       run: |
