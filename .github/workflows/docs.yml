@@ -18,8 +18,8 @@ jobs:
       with:
         python-version: '3.x'
     
-    - name: specify pythonpath
-      run: export pythonpath=$pythonpath:starburst_api
+    - name: Specify Python path
+      run: echo "PYTHONPATH=$(pwd)/starburst_api" >> $GITHUB_ENV
 
     - name: Install dependencies
       run: |
