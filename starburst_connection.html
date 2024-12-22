@@ -46,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Starburst API Python</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Starburst Connection Info</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classes.class_starburst_connection_info.StarburstConnectionInfo"><code class="docutils literal notranslate"><span class="pre">StarburstConnectionInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 </ul>
 </li>
 </ul>
@@ -95,6 +96,29 @@
 </dl>
 </dd></dl>
 
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
+<p>Here’s how you can create an instance of <cite>StarburstConnectionInfo</cite> and use it to establish a connection:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+from my_module import StarburstConnectionInfo</p>
+<p># Create an instance of StarburstConnectionInfo
+connection_info = StarburstConnectionInfo(</p>
+<blockquote>
+<div><p>host=”starburst.example.com”,
+user=”my_user”,
+password=”my_password”,
+port=”8080”,  # Custom port
+catalog=”my_catalog”,  # Custom catalog
+schema=”my_schema”  # Custom schema</p>
+</div></blockquote>
+<p>)</p>
+<p># Access connection information
+print(connection_info.host)  # “starburst.example.com”
+print(connection_info.user)  # “my_user”
+print(connection_info.port)  # “8080”
+print(connection_info.catalog)  # “my_catalog”
+print(connection_info.schema)  # “my_schema”</p>
+</section>
 </section>
 
 
