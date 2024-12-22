@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Starburst Domain Info &mdash; starburst-python-wrapper 0.5.0 documentation</title>
+  <title>Owner &mdash; starburst-python-wrapper 0.5.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Owner" href="owner.html" />
-    <link rel="prev" title="Starburst Connection Info" href="starburst_connection.html" /> 
+    <link rel="prev" title="Starburst Domain Info" href="domain_info.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,13 +45,12 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Starburst API Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="starburst_connection.html">Starburst Connection Info</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Starburst Domain Info</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="domain_info.html">Starburst Domain Info</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Owner</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classes.class_starburst_domain_info.StarburstDomainInfo"><code class="docutils literal notranslate"><span class="pre">StarburstDomainInfo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Usage Example</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="owner.html">Owner</a></li>
 </ul>
 
         </div>
@@ -69,9 +67,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Starburst Domain Info</li>
+      <li class="breadcrumb-item active">Owner</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/domain_info.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/owner.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,8 +77,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="starburst-domain-info">
-<h1>Starburst Domain Info<a class="headerlink" href="#starburst-domain-info" title="Link to this heading"></a></h1>
+  <section id="owner">
+<h1>Owner<a class="headerlink" href="#owner" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="classes.class_starburst_domain_info.StarburstDomainInfo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">classes.class_starburst_domain_info.</span></span><span class="sig-name descname"><span class="pre">StarburstDomainInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst_domain_info.StarburstDomainInfo" title="Link to this definition"></a></dt>
@@ -108,30 +106,22 @@
 
 <section id="usage-example">
 <h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
-<p>Here’s how you can create an instance of <cite>StarburstConnectionInfo</cite> and use it to establish a connection:</p>
-</section>
-<section id="id1">
-<h2>Usage Example<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<p>Here’s an example of how to use the <cite>StarburstDomainInfo</cite> class:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">starburst_api.classes</span>  <span class="kn">import</span> <span class="n">StarburstDomainInfo</span>
+<p>Here’s how you can create an <cite>Owner</cite> object and handle potential exceptions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">starburst_api.classes</span> <span class="kn">import</span> <span class="n">Owner</span>
 
-<span class="c1"># Create an instance of StarburstDomainInfo</span>
-<span class="n">domain_info</span> <span class="o">=</span> <span class="n">StarburstDomainInfo</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CustomerData&quot;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Domain for customer-related data.&quot;</span><span class="p">,</span>
-    <span class="n">schema_location</span><span class="o">=</span><span class="s2">&quot;s3://starburst/schemas/customer_data&quot;</span><span class="p">,</span>
-    <span class="n">owner</span><span class="o">=</span><span class="s2">&quot;data_engineering&quot;</span><span class="p">,</span>  <span class="c1"># Custom metadata passed via options</span>
-    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;production&quot;</span><span class="p">,</span> <span class="s2">&quot;analytics&quot;</span><span class="p">]</span>  <span class="c1"># Additional metadata</span>
-<span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Create an Owner instance</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">Owner</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span>
+        <span class="n">email</span><span class="o">=</span><span class="s2">&quot;alice.johnson@example.com&quot;</span>
+    <span class="p">)</span>
 
-<span class="c1"># Access domain information</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">domain_info</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># Output: &quot;CustomerData&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">domain_info</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>  <span class="c1"># Output: &quot;Domain for customer-related data.&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">domain_info</span><span class="o">.</span><span class="n">schema_location</span><span class="p">)</span>  <span class="c1"># Output: &quot;s3://starburst/schemas/customer_data&quot;</span>
+    <span class="c1"># Access attributes</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">owner</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># Output: &quot;Alice Johnson&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">owner</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>  <span class="c1"># Output: &quot;alice.johnson@example.com&quot;</span>
 
-<span class="c1"># Access optional metadata</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">domain_info</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span>  <span class="c1"># Output: &quot;data_engineering&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">domain_info</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>  <span class="c1"># Output: [&quot;production&quot;, &quot;analytics&quot;]</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error creating owner: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -141,8 +131,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="starburst_connection.html" class="btn btn-neutral float-left" title="Starburst Connection Info" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="owner.html" class="btn btn-neutral float-right" title="Owner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="domain_info.html" class="btn btn-neutral float-left" title="Starburst Domain Info" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
