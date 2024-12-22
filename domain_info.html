@@ -47,6 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="starburst_connection.html">Starburst Connection Info</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Starburst Domain Info</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classes.class_starburst_domain_info.StarburstDomainInfo"><code class="docutils literal notranslate"><span class="pre">StarburstDomainInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 </ul>
 </li>
 </ul>
@@ -102,6 +103,30 @@
 </dl>
 </dd></dl>
 
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
+<p>Here’s how you can create an instance of <cite>StarburstConnectionInfo</cite> and use it to establish a connection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">my_module</span> <span class="kn">import</span> <span class="n">StarburstConnectionInfo</span>
+
+<span class="c1"># Create an instance of StarburstConnectionInfo</span>
+<span class="n">connection_info</span> <span class="o">=</span> <span class="n">StarburstConnectionInfo</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;starburst.example.com&quot;</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s2">&quot;my_user&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;my_password&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="s2">&quot;8080&quot;</span><span class="p">,</span>  <span class="c1"># Custom port</span>
+    <span class="n">catalog</span><span class="o">=</span><span class="s2">&quot;my_catalog&quot;</span><span class="p">,</span>  <span class="c1"># Custom catalog</span>
+    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;my_schema&quot;</span>  <span class="c1"># Custom schema</span>
+<span class="p">)</span>
+
+<span class="c1"># Access connection information</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">connection_info</span><span class="o">.</span><span class="n">host</span><span class="p">)</span>  <span class="c1"># &quot;starburst.example.com&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">connection_info</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>  <span class="c1"># &quot;my_user&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">connection_info</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>  <span class="c1"># &quot;8080&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">connection_info</span><span class="o">.</span><span class="n">catalog</span><span class="p">)</span>  <span class="c1"># &quot;my_catalog&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">connection_info</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>  <span class="c1"># &quot;my_schema&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
