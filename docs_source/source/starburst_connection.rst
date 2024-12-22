@@ -9,6 +9,7 @@ Usage Example
 Here’s how you can create an instance of `StarburstConnectionInfo` and use it to establish a connection:
 
 ```python
+
     from my_module import StarburstConnectionInfo
 
     # Create an instance of StarburstConnectionInfo
