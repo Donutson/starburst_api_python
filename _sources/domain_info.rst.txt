@@ -6,11 +6,6 @@ Starburst Domain Info
 Usage Example
 -------------
 
-Here’s how you can create an instance of `StarburstConnectionInfo` and use it to establish a connection:
-
-Usage Example
--------------
-
 Here’s an example of how to use the `StarburstDomainInfo` class:
 
 .. code-block:: python
