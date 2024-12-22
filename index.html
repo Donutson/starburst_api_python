@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Starburst API Python &mdash; starburst-python-wrapper 0.5.0 documentation</title>
+  <title>&lt;no title&gt; &mdash; starburst-python-wrapper 0.5.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Starburst Connection Info" href="starburst_connection.html" /> 
+    <link rel="next" title="Starburst API Python" href="introduction.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,6 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Starburst API Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="starburst_connection.html">Starburst Connection Info</a></li>
 </ul>
 
@@ -60,7 +61,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Starburst API Python</li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -70,73 +71,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="starburst-api-python">
-<h1>Starburst API Python<a class="headerlink" href="#starburst-api-python" title="Link to this heading"></a></h1>
-<p>The goal of this package is to create data products on Starburst using Python. This package leverages the <a class="reference external" href="https://docs.starburst.io/latest/api/index.html">Starburst REST API</a> to interact with your Starburst Enterprise instance.</p>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
-<p>To use this package, you need the following:</p>
-<ol class="arabic simple">
-<li><p>A Starburst Enterprise instance.</p></li>
-<li><p>Python &gt;= 3.7.*</p></li>
-<li><p>Required Python libraries:</p>
-<ul class="simple">
-<li><p><cite>trino</cite></p></li>
-<li><p><cite>pandas</cite></p></li>
-<li><p><cite>sqlalchemy</cite></p></li>
-<li><p><cite>sqlalchemy-trino</cite></p></li>
-</ul>
-</li>
-</ol>
-</section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
-<p>Install the package using the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/Donutson/starburst_api_python.git
-</pre></div>
-</div>
-</section>
-<section id="package-overview">
-<h2>Package Overview<a class="headerlink" href="#package-overview" title="Link to this heading"></a></h2>
-<section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
-<p><strong>StarburstConnectionInfo</strong></p>
-<p>Defines a connection to a Starburst instance.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">connection_info</span> <span class="o">=</span> <span class="n">StarburstConnectionInfo</span><span class="p">(</span>
-    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
-    <span class="n">user</span><span class="o">=</span><span class="s2">&quot;starburst&quot;</span><span class="p">,</span>
-    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;starburst_pass&quot;</span><span class="p">,</span>
-    <span class="n">port</span><span class="o">=</span><span class="s2">&quot;30443&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>StarburstDomainInfo</strong></p>
-<p>Defines a domain in Starburst.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">domain</span> <span class="o">=</span> <span class="n">StarburstDomainInfo</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;test_api_python&quot;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Creating a domain via Python&quot;</span><span class="p">,</span>
-    <span class="n">schema</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<div class="toctree-wrapper compound">
+  <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Starburst API Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#package-overview">Package Overview</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="starburst_connection.html">Starburst Connection Info</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="starburst_connection.html#classes.class_starburst_connection_info.StarburstConnectionInfo"><code class="docutils literal notranslate"><span class="pre">StarburstConnectionInfo</span></code></a></li>
 </ul>
 </li>
 </ul>
 </div>
-</section>
-</section>
-</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="starburst_connection.html" class="btn btn-neutral float-right" title="Starburst Connection Info" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="introduction.html" class="btn btn-neutral float-right" title="Starburst API Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
