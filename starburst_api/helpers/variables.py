@@ -1,5 +1,5 @@
 """
-Module for sharable variables
+Module for shareable variables
 """
 
 APPLICATION_JSON_TEXT = "application/json"
