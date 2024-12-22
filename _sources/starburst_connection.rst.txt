@@ -10,7 +10,7 @@ Here’s how you can create an instance of `StarburstConnectionInfo` and use it 
 
 .. code-block:: python
 
-    from my_module import StarburstConnectionInfo
+    from starburst_api.classes import StarburstConnectionInfo
 
     # Create an instance of StarburstConnectionInfo
     connection_info = StarburstConnectionInfo(
