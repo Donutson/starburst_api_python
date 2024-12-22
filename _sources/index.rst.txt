@@ -18,3 +18,4 @@
    dataset_view
    dataset_materialized_view
    data_product
+   client_starburst
