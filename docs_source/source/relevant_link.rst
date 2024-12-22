@@ -1,7 +1,7 @@
 Relevant Link
 =========================
 
-.. autoclass:: classes.class_starburst_relevant_link.RelevantLink
+.. autoclass:: classes.class_relevant_link.RelevantLink
 
 Usage Example
 -------------
