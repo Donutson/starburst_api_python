@@ -11,12 +11,12 @@ class StarburstConnectionInfo:
         Initialize the StarburstConnectionInfo object.
 
         Parameters:
-        - host (str): The hostname or IP address of the Starburst server.
-        - user (str): The username for authentication.
-        - password (str): The password for authentication.
-        - port (int): The port number for the connection. Default is 30443.
-        - catalog (str): The default catalog to use. Default is None.
-        - schema (str): The default schema to use. Default is None.
+            host (str): The hostname or IP address of the Starburst server.
+            user (str): The username for authentication.
+            password (str): The password for authentication.
+            port (int): The port number for the connection. Default is 30443.
+            catalog (str): The default catalog to use. Default is None.
+            schema (str): The default schema to use. Default is None.
         """
         self.host = host
         self.user = user
