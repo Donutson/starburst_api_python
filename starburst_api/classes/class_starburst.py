@@ -261,6 +261,7 @@ class Starburst:
         Side Effects:
             Prints messages to the console based on the HTTP status code returned by the
             server:
+            
             - 200: Update successful.
             - 400: Bad request (e.g., malformed request body).
             - 403: Operation forbidden (e.g., insufficient permissions).
@@ -924,6 +925,7 @@ class Starburst:
             view_name (str): The name to assign to the view. This name must be unique within the database or schema
                             unless it is replacing an existing view.
             **options (dict): Optional keyword arguments to further customize the view:
+                
                 - comment (str): A comment to describe the view, providing context or documentation for
                                 future reference. Default is an empty space if not specified.
 
