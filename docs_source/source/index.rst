@@ -15,3 +15,4 @@
    tag
    definition_properties
    dataset_column
+   dataset_view
