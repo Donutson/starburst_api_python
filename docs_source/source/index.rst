@@ -6,7 +6,7 @@
 Starburst API Python
 ====================
 
-The goal of this package is to create data products on Starburst using Python. This package leverages the `Starburst REST API https://docs.starburst.io/latest/api/index.html`_ to interact with your Starburst Enterprise instance.
+The goal of this package is to create data products on Starburst using Python. This package leverages the `Starburst REST API https://docs.starburst.io/latest/api/index.html_` to interact with your Starburst Enterprise instance.
 
 Prerequisites
 -------------
