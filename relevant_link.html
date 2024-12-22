@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Relevant Tag" href="tag.html" />
+    <link rel="next" title="Tag" href="tag.html" />
     <link rel="prev" title="Owner" href="owner.html" /> 
 </head>
 
@@ -49,10 +49,15 @@
 <li class="toctree-l1"><a class="reference internal" href="domain_info.html">Starburst Domain Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="owner.html">Owner</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Relevant Link</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classes.class_relevant_link.RelevantLink"><code class="docutils literal notranslate"><span class="pre">RelevantLink</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_relevant_link.RelevantLink.label"><code class="docutils literal notranslate"><span class="pre">RelevantLink.label</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_relevant_link.RelevantLink.url"><code class="docutils literal notranslate"><span class="pre">RelevantLink.url</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tag.html">Relevant Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tag.html">Tag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="definition_properties.html">Definition Properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_column.html">Dataset Column</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_view.html">Dataset View</a></li>
@@ -87,6 +92,46 @@
              
   <section id="relevant-link">
 <h1>Relevant Link<a class="headerlink" href="#relevant-link" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="classes.class_relevant_link.RelevantLink">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">classes.class_relevant_link.</span></span><span class="sig-name descname"><span class="pre">RelevantLink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_relevant_link.RelevantLink" title="Link to this definition"></a></dt>
+<dd><p>Represents a relevant link.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_relevant_link.RelevantLink.label">
+<span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#classes.class_relevant_link.RelevantLink.label" title="Link to this definition"></a></dt>
+<dd><p>The label of the relevant link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_relevant_link.RelevantLink.url">
+<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#classes.class_relevant_link.RelevantLink.url" title="Link to this definition"></a></dt>
+<dd><p>The URL of the relevant link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialize a RelevantLink object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – The label of the relevant link.</p></li>
+<li><p><strong>url</strong> (<em>str</em>) – The URL of the relevant link.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If label or url exceeds the maximum length.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <section id="usage-example">
 <h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
 <p>Here’s how to create and use a <cite>RelevantLink</cite> object:</p>
@@ -115,7 +160,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="owner.html" class="btn btn-neutral float-left" title="Owner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tag.html" class="btn btn-neutral float-right" title="Relevant Tag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tag.html" class="btn btn-neutral float-right" title="Tag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

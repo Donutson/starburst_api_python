@@ -49,12 +49,24 @@
 <li class="toctree-l1"><a class="reference internal" href="domain_info.html">Starburst Domain Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="owner.html">Owner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="relevant_link.html">Relevant Link</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tag.html">Relevant Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tag.html">Tag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="definition_properties.html">Definition Properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_column.html">Dataset Column</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_view.html">Dataset View</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_materialized_view.html">Dataset Materialized View</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data Product</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classes.class_data_product.DataProduct"><code class="docutils literal notranslate"><span class="pre">DataProduct</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.name"><code class="docutils literal notranslate"><span class="pre">DataProduct.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.catalog_name"><code class="docutils literal notranslate"><span class="pre">DataProduct.catalog_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.data_domain_id"><code class="docutils literal notranslate"><span class="pre">DataProduct.data_domain_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.summary"><code class="docutils literal notranslate"><span class="pre">DataProduct.summary</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.description"><code class="docutils literal notranslate"><span class="pre">DataProduct.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.views"><code class="docutils literal notranslate"><span class="pre">DataProduct.views</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.materialized_views"><code class="docutils literal notranslate"><span class="pre">DataProduct.materialized_views</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.owners"><code class="docutils literal notranslate"><span class="pre">DataProduct.owners</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_data_product.DataProduct.relevant_links"><code class="docutils literal notranslate"><span class="pre">DataProduct.relevant_links</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 </ul>
 </li>
@@ -87,6 +99,126 @@
              
   <section id="data-product">
 <h1>Data Product<a class="headerlink" href="#data-product" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">classes.class_data_product.</span></span><span class="sig-name descname"><span class="pre">DataProduct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">catalog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_domain_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_data_product.DataProduct" title="Link to this definition"></a></dt>
+<dd><p>Represents a data product.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.name" title="Link to this definition"></a></dt>
+<dd><p>The name of the data product in lower_underscore_camel_case format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.catalog_name">
+<span class="sig-name descname"><span class="pre">catalog_name</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.catalog_name" title="Link to this definition"></a></dt>
+<dd><p>The name of the catalog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.data_domain_id">
+<span class="sig-name descname"><span class="pre">data_domain_id</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.data_domain_id" title="Link to this definition"></a></dt>
+<dd><p>The ID of the data domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.summary" title="Link to this definition"></a></dt>
+<dd><p>Summary description for this data product.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.description" title="Link to this definition"></a></dt>
+<dd><p>Description of the data product. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.views">
+<span class="sig-name descname"><span class="pre">views</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.views" title="Link to this definition"></a></dt>
+<dd><p>List of dataset views. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of DatasetView</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.materialized_views">
+<span class="sig-name descname"><span class="pre">materialized_views</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.materialized_views" title="Link to this definition"></a></dt>
+<dd><p>List of materialized dataset views. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of DatasetMaterializedView</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.owners">
+<span class="sig-name descname"><span class="pre">owners</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.owners" title="Link to this definition"></a></dt>
+<dd><p>List of owners of the data product. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="owner.html#classes.class_owner.Owner" title="classes.class_owner.Owner">Owner</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_data_product.DataProduct.relevant_links">
+<span class="sig-name descname"><span class="pre">relevant_links</span></span><a class="headerlink" href="#classes.class_data_product.DataProduct.relevant_links" title="Link to this definition"></a></dt>
+<dd><p>List of relevant links related to the data product. (Optional)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="relevant_link.html#classes.class_relevant_link.RelevantLink" title="classes.class_relevant_link.RelevantLink">RelevantLink</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialize a DataProduct object.</p>
+<dl class="simple">
+<dt>Args:s</dt><dd><p>name (str): The name of the data product in lower_underscore_camel_case format.
+catalog_name (str): The name of the catalog.
+data_domain_id (str): The ID of the data domain.
+summary (str): Summary description for this data product.
+<a href="#id1"><span class="problematic" id="id2">**</span></a>options: Additional options to specify id, description, views, materialized_views, owners,
+and relevant_links.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If any of the attributes violate the specified constraints.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <section id="usage-example">
 <h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
 <p>Here’s an example of how to create and use a <cite>DataProduct</cite> object:</p>
