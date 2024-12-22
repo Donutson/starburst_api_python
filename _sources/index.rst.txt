@@ -14,7 +14,7 @@ Prerequisites
 To use this package, you need the following:
 
 1. A Starburst Enterprise instance.
-2. Python >= 3.7.
+2. Python >= 3.7.*
 3. Required Python libraries:
 
    - `trino`
@@ -60,6 +60,7 @@ Defines a domain in Starburst.
         name="test_api_python",
         description="Creating a domain via Python",
         schema
+    )
 
 
 .. toctree::
