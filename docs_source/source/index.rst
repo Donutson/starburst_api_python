@@ -66,4 +66,5 @@ Defines a domain in Starburst.
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
+   starburst_connection
