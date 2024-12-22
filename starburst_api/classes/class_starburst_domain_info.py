@@ -14,17 +14,17 @@ class StarburstDomainInfo:
         Initialize the StarburstDomain object.
 
         Parameters:
-        - name (str): The name of the domain.
-        - description (str): The description of the domain.
-        - schema_location (str): The location of the schema.
-        - id (str): Domain UUID
-        - assigned_data_products (list[StarburstDataProductInfo]):
+            name (str): The name of the domain.
+            description (str): The description of the domain.
+            schema_location (str): The location of the schema.
+            id (str): Domain UUID
+            assigned_data_products (list[StarburstDataProductInfo]):
             List of the data products that are assigned to this domain.
-        - created_by (str): Name of the user who created this domain.
-        - created_at (str): Timestamp of when this domain was created.
-        - updated_at (str): Timestamp of when this domain was last updated.
+            created_by (str): Name of the user who created this domain.
+            created_at (str): Timestamp of when this domain was created.
+            updated_at (str): Timestamp of when this domain was last updated.
             This is initialized to createdAt.
-        - updated_by (str): Name of the user who last updated this domain.
+            updated_by (str): Name of the user who last updated this domain.
             This is initialized to createdBy
         """
         if len(name) > self.MAX_NAME_LENGTH:
