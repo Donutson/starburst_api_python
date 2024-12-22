@@ -212,11 +212,14 @@ It allows for the addition of an optional comment to describe the view, which ca
 that typically selects data from one or more tables.</p></li>
 <li><p><strong>view_name</strong> (<em>str</em>) – The name to assign to the view. This name must be unique within the database or schema
 unless it is replacing an existing view.</p></li>
-<li><p><strong>**options</strong> (<em>dict</em>) – <p>Optional keyword arguments to further customize the view:
-- comment (str): A comment to describe the view, providing context or documentation for</p>
-<blockquote>
-<div><p>future reference. Default is an empty space if not specified.</p>
-</div></blockquote>
+<li><p><strong>**options</strong> (<em>dict</em>) – <p>Optional keyword arguments to further customize the view:</p>
+<ul>
+<li><dl class="simple">
+<dt>comment (str): A comment to describe the view, providing context or documentation for</dt><dd><p>future reference. Default is an empty space if not specified.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </p></li>
 </ul>
 </dd>
@@ -645,13 +648,15 @@ that serializes its properties to a dictionary format.</p>
 </dl>
 <dl class="simple">
 <dt>Side Effects:</dt><dd><p>Prints messages to the console based on the HTTP status code returned by the
-server:
-- 200: Update successful.
-- 400: Bad request (e.g., malformed request body).
-- 403: Operation forbidden (e.g., insufficient permissions).
-- 404: Data product not found on the server.
-- 409: Conflict (e.g., concurrent modification conflict).
-- Other codes: Generic failure message with the status code.</p>
+server:</p>
+<ul class="simple">
+<li><p>200: Update successful.</p></li>
+<li><p>400: Bad request (e.g., malformed request body).</p></li>
+<li><p>403: Operation forbidden (e.g., insufficient permissions).</p></li>
+<li><p>404: Data product not found on the server.</p></li>
+<li><p>409: Conflict (e.g., concurrent modification conflict).</p></li>
+<li><p>Other codes: Generic failure message with the status code.</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
