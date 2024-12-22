@@ -1,7 +1,7 @@
 Data Product
 =========================
 
-.. autoclass:: classes.class_data_product.DatasetMaterializedView
+.. autoclass:: classes.class_data_product.DataProduct
 
 Usage Example
 -------------
