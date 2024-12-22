@@ -25,13 +25,14 @@ class DataProduct:
         """
         Initialize a DataProduct object.
 
-        Args:s
+        Args:
             name (str): The name of the data product in lower_underscore_camel_case format.
             catalog_name (str): The name of the catalog.
             data_domain_id (str): The ID of the data domain.
             summary (str): Summary description for this data product.
             **options: Additional options to specify id, description, views, materialized_views, owners,
             and relevant_links.
+            
         Raises:
             ValueError: If any of the attributes violate the specified constraints.
         """

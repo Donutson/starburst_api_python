@@ -261,7 +261,7 @@ class Starburst:
         Side Effects:
             Prints messages to the console based on the HTTP status code returned by the
             server:
-            
+
             - 200: Update successful.
             - 400: Bad request (e.g., malformed request body).
             - 403: Operation forbidden (e.g., insufficient permissions).
@@ -275,8 +275,10 @@ class Starburst:
             Data product has been updated successfully.
 
         Notes:
+
             - The data product instance must have a valid 'id' that exists on the server.
             - Ensure that the 'DataProduct' class has a 'to_dict' method which correctly
+            
             serializes the data product's attributes to a dictionary.
         """
         url = (
