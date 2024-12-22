@@ -10,7 +10,7 @@ Here’s an example of how to create and use a `Tag` object:
 
 .. code-block:: python
 
-    from my_module import Tag
+    from starburst_api.classes import Tag
 
     try:
         # Create a Tag instance
