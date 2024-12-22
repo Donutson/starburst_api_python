@@ -1,7 +1,7 @@
 Owner
 =========================
 
-.. autoclass:: classes.class_starburst_domain_info.StarburstDomainInfo
+.. autoclass:: classes.class_owner.Owner
 
 Usage Example
 -------------
