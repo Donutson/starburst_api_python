@@ -15,7 +15,7 @@ Here’s an example of how to use the `StarburstDomainInfo` class:
 
 .. code-block:: python
     
-    from my_module import StarburstDomainInfo
+    from starburst_api.classes  import StarburstDomainInfo
 
     # Create an instance of StarburstDomainInfo
     domain_info = StarburstDomainInfo(
