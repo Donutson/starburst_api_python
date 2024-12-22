@@ -11,6 +11,7 @@ class StarburstConnectionInfo:
         Initialize the StarburstConnectionInfo object.
 
         Parameters:
+        
             host (str): The hostname or IP address of the Starburst server.
             user (str): The username for authentication.
             password (str): The password for authentication.
