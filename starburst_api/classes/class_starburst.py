@@ -43,8 +43,7 @@ class Starburst:
         Initialize the Starburst client.
 
         Parameters:
-        - connection_info (StarburstConnectionInfo): Information required
-            to establish a connection with Starburst.
+            connection_info (StarburstConnectionInfo): to establish a connection with Starburst.
         """
         self.connection_info = connection_info
 
@@ -59,7 +58,7 @@ class Starburst:
         Create a domain in Starburst.
 
         Parameters:
-        - domain (StarburstDomain): The domain object to be created.
+            domain (StarburstDomain): The domain object to be created.
         """
         url = (
             f"https://{self.connection_info.host}:{self.connection_info.port}/"
