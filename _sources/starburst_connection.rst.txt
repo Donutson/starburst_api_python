@@ -6,7 +6,7 @@ Starburst Connection Info
 Usage Example
 -------------
 
-Here’s how you can create an instance of `StarburstConnectionInfo` and use it to establish a connection:
+Here’s how you can create an instance of `StarburstConnectionInfo` :
 
 .. code-block:: python
 
