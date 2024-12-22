@@ -8,7 +8,7 @@ Usage Example
 
 Here’s how you can create an instance of `StarburstConnectionInfo` and use it to establish a connection:
 
-```python
+.. code-block:: python
 
     from my_module import StarburstConnectionInfo
 
