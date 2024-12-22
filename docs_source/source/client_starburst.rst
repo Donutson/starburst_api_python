@@ -2,6 +2,7 @@ Client Starburst
 =========================
 
 .. autoclass:: classes.class_starburst.Starburst
+    :members:
 
 .. code-block:: python
 
