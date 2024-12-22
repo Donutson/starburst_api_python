@@ -11,3 +11,4 @@
    starburst_connection
    domain_info
    owner
+   relevant_link

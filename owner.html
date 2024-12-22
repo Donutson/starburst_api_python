@@ -19,6 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Relevant Link" href="relevant_link.html" />
     <link rel="prev" title="Starburst Domain Info" href="domain_info.html" /> 
 </head>
 
@@ -47,10 +48,15 @@
 <li class="toctree-l1"><a class="reference internal" href="starburst_connection.html">Starburst Connection Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="domain_info.html">Starburst Domain Info</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Owner</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#classes.class_starburst_domain_info.StarburstDomainInfo"><code class="docutils literal notranslate"><span class="pre">StarburstDomainInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classes.class_owner.Owner"><code class="docutils literal notranslate"><span class="pre">Owner</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_owner.Owner.name"><code class="docutils literal notranslate"><span class="pre">Owner.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes.class_owner.Owner.email"><code class="docutils literal notranslate"><span class="pre">Owner.email</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="relevant_link.html">Relevant Link</a></li>
 </ul>
 
         </div>
@@ -80,26 +86,41 @@
   <section id="owner">
 <h1>Owner<a class="headerlink" href="#owner" title="Link to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="classes.class_starburst_domain_info.StarburstDomainInfo">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">classes.class_starburst_domain_info.</span></span><span class="sig-name descname"><span class="pre">StarburstDomainInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_starburst_domain_info.StarburstDomainInfo" title="Link to this definition"></a></dt>
-<dd><p>Represents a domain in Starburst.</p>
-<p>Initialize the StarburstDomain object.</p>
+<dt class="sig sig-object py" id="classes.class_owner.Owner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">classes.class_owner.</span></span><span class="sig-name descname"><span class="pre">Owner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.class_owner.Owner" title="Link to this definition"></a></dt>
+<dd><p>Represents an owner.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_owner.Owner.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#classes.class_owner.Owner.name" title="Link to this definition"></a></dt>
+<dd><p>The name of the owner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="classes.class_owner.Owner.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#classes.class_owner.Owner.email" title="Link to this definition"></a></dt>
+<dd><p>The email of the owner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialize an Owner object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – The name of the domain.</p></li>
-<li><p><strong>description</strong> (<em>str</em>) – The description of the domain.</p></li>
-<li><p><strong>schema_location</strong> (<em>str</em>) – The location of the schema.</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – Domain UUID</p></li>
-<li><p><strong>assigned_data_products</strong> (<em>list</em><em>[</em><em>StarburstDataProductInfo</em><em>]</em>)</p></li>
-<li><p><strong>domain.</strong> (<em>List</em><em> of </em><em>the data products that are assigned to this</em>)</p></li>
-<li><p><strong>created_by</strong> (<em>str</em>) – Name of the user who created this domain.</p></li>
-<li><p><strong>created_at</strong> (<em>str</em>) – Timestamp of when this domain was created.</p></li>
-<li><p><strong>updated_at</strong> (<em>str</em>) – Timestamp of when this domain was last updated.</p></li>
-<li><p><strong>createdAt.</strong> (<em>This is initialized to</em>)</p></li>
-<li><p><strong>updated_by</strong> (<em>str</em>) – Name of the user who last updated this domain.</p></li>
-<li><p><strong>createdBy</strong> (<em>This is initialized to</em>)</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the owner.</p></li>
+<li><p><strong>email</strong> (<em>str</em>) – The email of the owner.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If any of the attributes violate the specified constraints.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -132,6 +153,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="domain_info.html" class="btn btn-neutral float-left" title="Starburst Domain Info" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="relevant_link.html" class="btn btn-neutral float-right" title="Relevant Link" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
